@@ -8,16 +8,59 @@
         <vm:ListViewPageViewModel View="{x:Reference page}"/>
     </ContentPage.BindingContext>
 
-    <ListView ItemsSource="{Binding ItemList}" HasUnevenRows="True">
+    <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout>
-                        <Label Text="{Binding}"/>
-                        <Button Text="Button"
+                   
+                    <StackLayout  Orientation="Vertical" HorizontalOptions="Start">
+                        
+                        <!-- 上段 -->
+                        <StackLayout Padding="0,5, 0, 0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="End">
+                            <Label Text="{Binding}"
+                                   HorizontalTextAlignment = "Start"
+                                   VerticalTextAlignment = "End"/>
+                            <!-- 項目名 -->
+                            <Label  Text = "Name"
+                                                TextColor="Gray"
+                                                FontSize="Micro" 
+                                                WidthRequest = "100"
+                                                HeightRequest="50"       
+                                                HorizontalTextAlignment = "Start"
+                                                VerticalTextAlignment = "End"/>
+                            <Label Text = "Srock"
+                                                TextColor="Gray"
+                                                FontSize="Micro"
+                                                WidthRequest = "100"
+                                                HorizontalTextAlignment = "Start"
+                                                VerticalTextAlignment = "End"/>
+                          
+                        </StackLayout>
+                        <!-- 上段 -->
+
+                        <!-- 下段 -->
+                        <StackLayout Padding="0, 0, 0, 15" Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="End">
+                            <!-- "銘柄"  "price.Name" -->
+                            <Label x:Name = "City"
+                                                Text = "{Binding Name}"
+                                                TextColor="Olive"
+                                                WidthRequest = "100"
+                                                HorizontalTextAlignment = "Start"
+                                                VerticalTextAlignment = "Start"/>
+                            <!-- 数量 > -->
+                            <Label x:Name= "Stock"
+                                                Text = "{Binding Stocks}"
+                                                TextColor = "Color.White"
+                                                WidthRequest = "100"/>
+                            
+                        </StackLayout>
+                        <!-- 下段 -->
+                            <StackLayout/>
+                            <StackLayout/>
+                            <Button Text="Button"
                             Command="{Binding BindingContext.ItemCommand, Source={x:Reference page}}"
                             CommandParameter="{Binding}"/>
-                    </StackLayout>
+                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
