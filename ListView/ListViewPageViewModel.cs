@@ -21,52 +21,45 @@ namespace ListView
         /// <summary>
         /// ListView へ表示するデータ
         /// </summary>
-        public ObservableCollection<string> ItemList { get; } = new ObservableCollection<string>(new[] { "item01", "item02", "item03", "item04" });
+        //public ObservableCollection<string> ItemList { get; } = new ObservableCollection<string>(new[] { "item01", "item02", "item03", "item04" });
 
 
+       
+        public ObservableCollection<Price> ItemList { get; set; }
         List<Price> prices = new List<Price>(); //ｺﾝｽﾄﾗｸﾀ
-        public ObservableCollection<string> PriceItemList { get; set; }
+
         public void Sample()
         {
-            PriceItemList = new ObservableCollection<string>(new[] { "15", });
+            //PriceItemList = new ObservableCollection<Price>();
 
-            //PriceItemList = new ObservableCollection<Price>() {
-            //    new Price()
-            //    {
-            //        Name = "Sony",
-            //        Stocks = 100,
-            //        Itemprice = 2015,
-            //        Realprice = 1000,
-            //        RealValue = 100,
-            //        Percent = "5"
-            //    },
-            //    new Price()
-            //    {
+            ItemList = new ObservableCollection<Price>() {
+                new Price()
+                {
+                    Name = "Sony",
+                    Stocks = 100,
+                    Itemprice = 2015,
+                    Realprice = 1000,
+                    RealValue = 100,
+                    Percent = "5"
+                },
+                new Price()
+                {
+                    Name = "Morito",
+                    Stocks = 100,
+                    Itemprice = 2015,
+                    Realprice = 1000,
+                    RealValue = 100,
+                    Percent = "5"
+                },
 
-            //    }
 
-
-            //};
+            };
 
 
         }
 
 
-      
-
-
-
-    ////////////////////////
-    public class MainViewModel
-        {
-            public ObservableCollection<string> ItemListSample { get; set; }
-            public MainViewModel()
-            {
-                ItemListSample = new ObservableCollection<string>(new[] { "itemsample1","itemsample2" } );
-            }
-
-        }
-      
+    
 
 
 
@@ -85,16 +78,16 @@ namespace ListView
         public ListViewPageViewModel()
         {
             ItemCommand = new CountUpCommand(OnItemCommand);
-            
+            Sample();
         }
 
         /// <summary>
         /// ListView の Button 押下時の動作
         /// </summary>
         /// <param name="parameter"></param>
-        private void OnItemCommand( )
+        private void OnItemCommand()
         {
-            View.DisplayAlert("XSample", "parameter.ToString()", "OK");
+            View.DisplayAlert("XSample", ItemCommand.ToString(), "OK");
         }
     }
 }

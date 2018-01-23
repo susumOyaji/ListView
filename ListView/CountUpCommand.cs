@@ -19,7 +19,7 @@ namespace ListView
 
         #region コンストラクタ
 
-        internal CountUpCommand(Action action)
+        internal  CountUpCommand(Action action)
         {
             this._action = action;
         }
