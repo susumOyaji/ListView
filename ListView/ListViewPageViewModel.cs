@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
+
 namespace ListView
 {
     /// <summary>
@@ -24,9 +25,25 @@ namespace ListView
         //public ObservableCollection<string> ItemList { get; } = new ObservableCollection<string>(new[] { "item01", "item02", "item03", "item04" });
 
 
-       
+        //private static decimal _stocks;
+        //public decimal Stocks//保有数*
+        //{
+        //    get { return _stocks; }
+        //    set
+        //    {
+        //        _stocks = value;
+        //        this.OnPropertyChanged(nameof(Stocks));
+        //    }
+        //}
+
+            
+
+
+
+
         public ObservableCollection<Price> ItemList { get; set; }
         List<Price> prices = new List<Price>(); //ｺﾝｽﾄﾗｸﾀ
+        
 
         public void Sample()
         {
@@ -79,6 +96,7 @@ namespace ListView
         {
             ItemCommand = new CountUpCommand(OnItemCommand);
             Sample();
+            DispSet();
         }
 
         /// <summary>
@@ -89,5 +107,57 @@ namespace ListView
         {
             View.DisplayAlert("XSample", ItemCommand.ToString(), "OK");
         }
+
+        private ObservableCollection<Price> Items;
+        List<Price> price = new List<Price>();
+
+        public async void DispSet()
+        {
+            int i = 0;
+            decimal TotalAssetAdd = 0;
+            decimal PayAssetpriceAdd = 0;
+
+            // UTF8のファイルの書き込み Edit. 
+            //string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
+            //List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
+            //List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
+           
+            price[i].Name = "Sample";
+            price[i].Itemprice = 999;
+            price[i].Stocks = 200;
+
+            List<Price> prices = Finance.Parse(price.ToString());//登録データ読み込み
+            List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
+
+            foreach (Price item in prices)
+            {
+                //Stocks = pricesanser[i].Stocks;//保有数*
+                //Itemprice = pricesanser[i].Itemprice;//購入価格*
+                //Realprice = pricesanser[i].Realprice;//現在値*
+                //Percent = pricesanser[i].Percent;//前日比％**
+                PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
+
+                TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
+                //Polar = pricesanser[i].Polar;
+
+                Items.Add(pricesanser[i]);// item);
+
+                i = ++i;
+            }
+            //PayAssetprice = PayAssetpriceAdd;
+            //TotalAsset = TotalAssetAdd;
+
+
+
+
+        }
+
+
+
+
+
+
+
+
     }
 }
