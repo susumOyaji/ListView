@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace ListView
 {
 
-    public partial class Finance
+    public static class Finance
     {
         //public static async Task<List<Price>> Parse( )
         public static List<Price> Parse(string responce)
@@ -26,7 +26,7 @@ namespace ListView
 
                 Price p = new Price();
                 p.Name = cols[0];//企業コード
-				p.Stocks = Convert.ToDecimal( cols[1]);//保有数
+                p.Stocks = Convert.ToDecimal(cols[1]);//保有数
                 p.Itemprice = Convert.ToInt64(cols[2]);//購入単価
 
                 prices.Add(p);
