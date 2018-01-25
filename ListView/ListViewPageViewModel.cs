@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 
 
+
 namespace ListView
 {
     /// <summary>
@@ -49,6 +50,7 @@ namespace ListView
         private void OnItemCommand()
         {
             View.DisplayAlert("XSample", ItemCommand.ToString(), "OK");
+            View.ChangeButtonColor();
         }
 
 
@@ -103,7 +105,7 @@ namespace ListView
             set
             {
                 _stocks = value;
-                this.OnPropertyChanged(nameof(Stocks));
+               // this.OnPropertyChanged(nameof(Stocks));
             }
 
         }
@@ -122,27 +124,26 @@ namespace ListView
 
 
             // UTF8のファイルの書き込み Edit. 
-            //string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
-            //List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
-            //List<Price> pricesanser = ;//await Models.PasonalGetserchi();//登録データの現在値を取得する
+            string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
+            List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
+            List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
 
-         
 
-            List<Price> prices = Finance.Parse(price.ToString());//登録データ読み込み
-            List<Price> pricesanser = this.ItemList;// await Models.PasonalGetserchi();//登録データの現在値を取得する
+
+
 
             foreach (Price item in prices)
             {
                 Stocks = pricesanser[i].Stocks;//保有数*
-                Itemprice = pricesanser[i].Itemprice;//購入価格*
-                Realprice = pricesanser[i].Realprice;//現在値*
-                Percent = pricesanser[i].Percent;//前日比％**
-                //PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
+                //Itemprice = pricesanser[i].Itemprice;//購入価格*
+                //Realprice = pricesanser[i].Realprice;//現在値*
+                //Percent = pricesanser[i].Percent;//前日比％**
+                PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
 
-                //TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
+                TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
                 //Polar = pricesanser[i].Polar;
 
-                //ItemList.Add(pricesanser[i]);// item);
+                ItemList.Add(pricesanser[i]);// item);
 
                 i = ++i;
             }

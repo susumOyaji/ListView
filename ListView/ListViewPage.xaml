@@ -8,7 +8,11 @@
         <vm:ListViewPageViewModel View="{x:Reference page}"/>
     </ContentPage.BindingContext>
 
+    <StackLayout >
+        <Button x:Name="abc"/>
+    </StackLayout>
     <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="True">
+        
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -75,7 +79,8 @@
                         <!-- 下段 -->
                     </StackLayout>
 
-                            <Button Text="Button"
+                            <Button x:Name="UptoButton"  Text="Button"
+                            BackgroundColor="Gray"
                             Command="{Binding BindingContext.ItemCommand, Source={x:Reference page}}"
                             CommandParameter="{Binding}"/>
                     
