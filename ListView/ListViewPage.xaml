@@ -11,83 +11,254 @@
     <StackLayout >
         <Button x:Name="abc"/>
     </StackLayout>
-    <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="True">
-        
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                <!-- 列全体 -->    
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center">    
-                   <StackLayout  Orientation="Vertical" HorizontalOptions="Center">
-                        <!-- 上段 -->
-                        <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                            <!-- 項目名 -->
-                            <Label  Text = "Name"
-                                TextColor="Red"
-                                FontSize="Micro" 
-                                WidthRequest = "100"
-                                HeightRequest="50"       
-                                HorizontalTextAlignment = "Start"
-                                VerticalTextAlignment = "End"/>
-                            <Label  Text = "Stock"
-                                TextColor="Red"
-                                FontSize="Micro"
-                                WidthRequest = "100"
-                                HorizontalTextAlignment = "Start"
-                                VerticalTextAlignment = "End"/>
-                            <Label  Text = "Itemprice"
-                                TextColor="Gray"
-                                FontSize="Micro" 
-                                WidthRequest = "100"
-                                HeightRequest="50"       
-                                HorizontalTextAlignment = "Start"
-                                VerticalTextAlignment = "End"/>
-                            <Label  Text = "Realprice"
-                                TextColor="Gray"
-                                FontSize="Micro"
-                                WidthRequest = "100"
-                                HorizontalTextAlignment = "Start"
-                                VerticalTextAlignment = "End"/>
-                        </StackLayout>
-                        <!-- 上段 -->
 
-                        <!-- 下段 -->
-                        <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                            <!-- "銘柄"  "price.Name" -->
-                            <Label x:Name = "City"
+
+    <StackLayout BackgroundColor="Black" >
+        <StackLayout x:Name="NewYorkLayout"  Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing = "1">
+            <Label x:Name="City" 
+                Text = "NEWYORK"
+                TextColor = "Yellow"
+                WidthRequest = "250"
+                HorizontalTextAlignment = "Start"
+                VerticalTextAlignment = "Center"
+                FontSize = "15"/>
+            <Label x:Name="Goingprice"
+                Text = "{Binding NewYorkStockPrice, StringFormat='{0:N1}'}"
+                TextColor = "White"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "End"
+                VerticalTextAlignment = "Center"/>
+            <Button x:Name="NewyorkButton"
+                Command="{Binding NewYorkIncriment}"
+                Text = "{Binding NewYorkStockPercent}"
+                TextColor = "Black"
+                HorizontalOptions = "End"
+                VerticalOptions = "Center"
+                WidthRequest = "80"
+                HeightRequest = "35"
+                FontSize="10">
+                <!-- BackgroundColor="{Binding CurrentColor}" -->
+            </Button>
+
+        </StackLayout>
+
+
+        <StackLayout x:Name="TokyoLayout"  Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing = "1">
+            <Label x:Name="City1"
+                Text = "TOKYO"
+                TextColor = "Yellow"
+                WidthRequest = "250"
+                HorizontalTextAlignment = "Start"
+                VerticalTextAlignment = "End"
+                FontSize = "15"/>
+
+            <Label x:Name="Goingprice1"
+                Text = "{Binding TokyoStockPrice, StringFormat='{0:N1}'}"
+                TextColor = "White"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "End"
+                VerticalTextAlignment = "Center"/>
+
+            <Button x:Name="Probability1" 
+                Command="{Binding TokyoIncriment}"
+                Text = "{Binding TokyoStockPercent, StringFormat='{0:N1}'}"
+                TextColor = "Black"
+                WidthRequest = "80"
+                HeightRequest = "35"
+                FontSize="10"/>
+        </StackLayout>
+
+
+
+        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "0" >
+            <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Label x:Name="TitleAsset"
+                Text = "資産状況"
+                TextColor = "White"
+                BackgroundColor="Black"
+                FontSize = "Micro"
+                WidthRequest = "80"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"/>
+
+                <Label x:Name="TitleTotal"
+                Text = "投資総額"
+                TextColor = "White"
+                FontSize = "Micro"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"/>
+
+                <Label x:Name="TitleStock"
+                Text = "時価総額"
+                TextColor = "White"
+                FontSize = "Micro"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"/>
+            </StackLayout>
+
+
+            <StackLayout x:Name="IAssetLayout" Padding="0,0,0,0" Orientation = "Horizontal" HorizontalOptions="StartAndExpand" >
+                <Label x:Name="AssetM"
+                Text = "Results"
+                TextColor = "Lime"
+                BackgroundColor="Black"   
+                WidthRequest = "100"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"
+                FontSize = "Small"/>
+                <Label x:Name="Investmen"
+                Text = "{Binding PayAssetprice, StringFormat='{0:N1}'}"
+                TextColor = "Yellow"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"
+                FontSize = "Small"/>
+                <Label x:Name="TotalAsset"
+                Text = "{Binding TotalAsset, StringFormat='{0:N1}'}"
+                TextColor = "Yellow"
+                WidthRequest = "100"
+                HorizontalTextAlignment = "Center"
+                VerticalTextAlignment = "Center"
+                FontSize = "Small"/>
+                <Button
+                Command="{Binding PersonalUp}"
+                Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
+                TextColor="Black"
+             />
+
+                <!--"FontAttributes.Bold | FontAttributes.Italic"-->
+            </StackLayout>
+         </StackLayout>
+
+        <!-- 境界線 -->
+        <StackLayout>
+            <BoxView Color="#fff"
+                 HeightRequest="3"
+                 Grid.Row="1" Grid.Column="0" />
+        </StackLayout>
+        <!-- Button -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+            <Button x:Name="AddButton"
+                Text = "Add"
+                WidthRequest = "60"
+                HeightRequest = "40"
+                BorderColor = "Gray"/>
+            <Button x:Name="DelButton"
+                Text = "DEL"
+                WidthRequest = "60"
+                HeightRequest = "40"
+                BorderColor = "Gray"/>
+            <Label x:Name="spece"
+                WidthRequest = "150"
+                HeightRequest = "40"/>
+            <Button x:Name="Ref"
+                Text="Ref."
+                Command="{Binding Ref}"
+                WidthRequest = "60"
+                HeightRequest = "40"/>
+        </StackLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="True">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- 列全体 -->
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout  Orientation="Vertical" HorizontalOptions="Center">
+                                <!-- 上段 -->
+                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <!-- 項目名 -->
+                                    <Label  Text = "Name"
+                                TextColor="Red"
+                                FontSize="Micro" 
+                                WidthRequest = "100"
+                                HeightRequest="50"       
+                                HorizontalTextAlignment = "Start"
+                                VerticalTextAlignment = "End"/>
+                                    <Label  Text = "Stock"
+                                TextColor="Red"
+                                FontSize="Micro"
+                                WidthRequest = "100"
+                                HorizontalTextAlignment = "Start"
+                                VerticalTextAlignment = "End"/>
+                                    <Label  Text = "Itemprice"
+                                TextColor="Gray"
+                                FontSize="Micro" 
+                                WidthRequest = "100"
+                                HeightRequest="50"       
+                                HorizontalTextAlignment = "Start"
+                                VerticalTextAlignment = "End"/>
+                                    <Label  Text = "Realprice"
+                                TextColor="Gray"
+                                FontSize="Micro"
+                                WidthRequest = "100"
+                                HorizontalTextAlignment = "Start"
+                                VerticalTextAlignment = "End"/>
+                                </StackLayout>
+                                <!-- 上段 -->
+
+                                <!-- 下段 -->
+                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <!-- "銘柄"  "price.Name" -->
+                                    <Label x:Name = "City"
                                 Text = "{Binding Name}"
                                 TextColor="Olive"
                                 WidthRequest = "100"
                                 HorizontalTextAlignment = "Start"
                                 VerticalTextAlignment = "Start"/>
-                            <!-- 数量 > -->
-                            <Label x:Name= "Stock"
-                                Text = "{Binding Stocks}"
-                                TextColor = "Black"
+                                    <!-- 数量 > -->
+                                    <Label x:Name= "Stock"
+                                Text = "{Binding Path= Stocks}"
+                                TextColor = "White"
                                 WidthRequest = "100"/>
-                            <Label x:Name= "Itemprice"
+                                    <Label x:Name= "Itemprice"
                                 Text = "{Binding Itemprice}"
-                                TextColor = "Black"
+                                TextColor = "White"
+                                WidthRequest = "100"/>
+                                    <Label x:Name= "Realprice"
+                                Text = "{Binding Realprice}"
+                                TextColor = "White"
+                                WidthRequest = "100"/>
+                                    <Label x:Name= "RealValue"
+                                Text = "{Binding RealValue}"
+                                TextColor = "White"
                                 WidthRequest = "100"/>
 
 
 
 
-                            
-                            
-                        </StackLayout>
-                        <!-- 下段 -->
-                    </StackLayout>
+
+                                </StackLayout>
+                                <!-- 下段 -->
+                            </StackLayout>
 
                             <Button x:Name="UptoButton"  Text="Button"
                             BackgroundColor="Gray"
                             Command="{Binding BindingContext.ItemCommand, Source={x:Reference page}}"
                             CommandParameter="{Binding}"/>
-                    
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
 
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
