@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 namespace ListView
 {
 
-    public static class Finance
+    public partial  class Finance
     {
+        int ButtonIdIndex = 0;
         //public static async Task<List<Price>> Parse( )
         public static List<Price> Parse(string responce)
         {
@@ -28,9 +29,9 @@ namespace ListView
                 p.Name = cols[0];//企業コード
                 p.Stocks = Convert.ToDecimal(cols[1]);//保有数
                 p.Itemprice = Convert.ToInt64(cols[2]);//購入単価
-
+               
                 prices.Add(p);
-
+                //++ButtonIdIndex;
             }
             return prices;
         }
@@ -53,6 +54,20 @@ namespace ListView
         public decimal Investmens { get; set; }//投資総額
         public decimal UptoAsset { get; set; }//個別利益
         public decimal TotalAsset { get; set; }//現在評価額合計
+        public string ButtonId { get; set; }
+        public string ButtonColor { get; set; }
+
     }
+
+    public partial class CityPrice
+    {
+        public string Name { get; set; }//会社名*
+        public decimal Realprice { get; set; }//現在値**
+        public string Prev_day { get; set; }//前日比±**
+        public string Percent { get; set; }//前日比％**
+        public string Polar { get; set; }//上げ下げ(+ or -)
+        public decimal NewYorkStockPrice { get; internal set; }
+    }
+
 
 }

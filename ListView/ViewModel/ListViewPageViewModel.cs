@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 
 
@@ -25,17 +26,18 @@ namespace ListView
         /// </summary>
         //ObservableCollection<string> ItemList { get; } = new ObservableCollection<string>(new[] { "item01", "item02", "item03", });
 
-        
+
 
 
 
         /// <summary>
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
-        public ICommand ItemCommand { get; }
-        //List<Price> price = new List<Price>();
-        public ObservableCollection<Price> ItemList { get; set; }
+        public ICommand ItemCommand { protected set; get; }
+       
 
+#region
+        public ObservableCollection<Price> ItemList { get; set; }
 
         private static decimal _payAssetprice;
         public decimal PayAssetprice//保有数* 購入価格 = 投資総額
@@ -55,7 +57,7 @@ namespace ListView
             set
             {
                 _totalAsset = value;
-               this.OnPropertyChanged(nameof(TotalAsset));
+                this.OnPropertyChanged(nameof(TotalAsset));
             }
 
         }
@@ -84,6 +86,28 @@ namespace ListView
             }
         }
 
+        private static decimal _currentTokyoStockPrice;
+        public decimal TokyoStockPrice
+        {
+            get { return _currentTokyoStockPrice; }
+            set
+            {
+                _currentTokyoStockPrice = value;
+                this.OnPropertyChanged(nameof(TokyoStockPrice));
+            }
+        }
+
+        private static string _currentTokyoStockPercent;
+        public string TokyoStockPercent
+        {
+            get { return _currentTokyoStockPercent; }
+            set
+            {
+                _currentTokyoStockPercent = value;
+                this.OnPropertyChanged(nameof(TokyoStockPercent));
+            }
+        }
+
         private static string _polar;
         public string Polar//(-)下落
         {
@@ -97,14 +121,72 @@ namespace ListView
         }
 
 
+        private static string _currentColor;
+        public string CurrentColor
+        {
+            get { return _currentColor; }
+            set
+            {
+                _currentColor = value;
+                this.OnPropertyChanged(nameof(CurrentColor));
+            }
+        }
+
+
+        private static decimal _uptoAsset;
+        public decimal UptoAsset
+        {
+            get { return _uptoAsset;}
+            set
+            {
+                _uptoAsset = value;
+                this.OnPropertyChanged(nameof(UptoAsset));
+            }
+        }
+
+
+        private static string _id;
+        public string ButtonId//保有数*
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                this.OnPropertyChanged(nameof(ButtonId));
+            }
+        }
+
+        private static string _buttonColor;
+        public string ButtonColor
+        {
+            get { return _buttonColor; }
+            set
+            {
+                _buttonColor = value;
+                this.OnPropertyChanged(nameof(ButtonColor));
+            }
+        }
 
 
 
+        private static string inputString = "";
+        // Public properties
+        public string InputString
+        {
+            get { return inputString; }
+            set
+            {
+                if (inputString != value)
+                {
+                    inputString = value;
+                }
+                inputString = value;
+                this.OnPropertyChanged(nameof(InputString));
+            }
+         }
 
 
-
-
-
+#endregion
 
 
 
@@ -113,9 +195,19 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            ItemCommand = new CountUpCommand(OnItemCommand);
-
+            //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
+
+            ItemCommand  = new Command<string>((key) =>
+            {
+                // Add the key to the input string.
+                //InputString += key;
+                OnItemCommand(key);
+            });
+         
+
+            NewYorkStock();
+            TokyoStock();
 
             Sample();
             DispSet();
@@ -123,24 +215,27 @@ namespace ListView
 
 
 
-
-        #region メソッド
+#region メソッド
 
         private async void NewYorkStock()
         {
             //CurrentColor = MainModelS.NewyorkButtonColer(CurrentColor);
-            var anser = await Models.Models.Getserchi("^DJI");
+            var anser = await Models.Getserchi("^DJI");
             NewYorkStockPrice = anser.Realprice;
             NewYorkStockPercent = anser.Prev_day;
 
+         
+
             if (anser.Polar == "Green")
             {
+                //CurrentColor = anser.Polar;
                 //NewYorkStockPercent = anser.Percent;
                 Polar = anser.Polar;// "Green";
             }
             if (anser.Polar == "Red")
             {
-                //NewYorkStockPercent = Dayratio;
+                View.NewyorkButtonColor();
+                NewYorkStockPercent = "Green";
                 Polar = anser.Polar; //CurrentColor = "Red";
             }
 
@@ -148,7 +243,7 @@ namespace ListView
 
         private async void TokyoStock()
         {
-            var anser = await Models.Models.Getserchi("998407");
+            var anser = await Models.Getserchi("998407");
             TokyoStockPrice = anser.Realprice;
             TokyoStockPercent = anser.Prev_day;
 
@@ -167,24 +262,32 @@ namespace ListView
 
         #endregion
 
+        //public ICommand Loss { get; } //ListView の各 Item 内の Button にバインディングする Command
+     
+
 
 
         /// <summary>
         /// ListView の Button 押下時の動作
         /// </summary>
         /// <param name="parameter"></param>
-        private void OnItemCommand()
+        private void OnItemCommand(string key)
         {
-            View.DisplayAlert("XSample", ItemCommand.ToString(), "OK");
-           // View.ChangeButtonColor();
+            View.DisplayAlert("XSample", "SelectItem-"+key, "OK");
+            View.NewyorkButtonColor();
+
+          
+
+            ButtonColor = "Green";
+
         }
 
-
-     
+             
                
-        public void Sample()
+        private async void Sample()
         {
-            ItemList = new ObservableCollection<Price>();
+            //ItemList = new ObservableCollection<Price>();
+            //TopList = new ObservableCollection<CityPrice>();
 
 
             ItemList.Add(new Price
@@ -194,9 +297,10 @@ namespace ListView
                 Itemprice = 2015,
                 Realprice = 1000,
                 RealValue = 100,
+                ButtonId = "sample",
+                ButtonColor = "Red",
                 Percent = "5"
             });
-
 
         }
 
@@ -229,7 +333,9 @@ namespace ListView
                     Itemprice = item.Itemprice,// 2015,
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
-                    Percent = item.Percent//前日比％**// "5"
+                    Percent = item.Percent,//前日比％**// "5"
+                    ButtonId = i.ToString(),
+                    ButtonColor = "Red"
                 });
 
                 PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
@@ -243,7 +349,7 @@ namespace ListView
             }
             PayAssetprice = PayAssetpriceAdd;
             TotalAsset = TotalAssetAdd;
-
+            UptoAsset = TotalAsset - PayAssetprice;
 
 
 

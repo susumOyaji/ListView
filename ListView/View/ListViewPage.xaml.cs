@@ -12,12 +12,13 @@ namespace ListView
 
         public static void ChangeButtonColor()
         {
-          // Name.BackgroundColor = Color.Red;// Polar;// "Red";
+          //NewYorkButton.BackgroundColor = Color.Red;// Polar;// "Red";
         }
 
-        public void NewyorkButtonColor()
+        public void NewyorkButtonColor( )
         {
-            //NewyorkButton.BackgroundColor = "Green";
+            
+            NewyorkButton.BackgroundColor = Color.Red;
             //Goingprice.TextColor = "#0000FF";
             //City.TextColor = "Green";
 

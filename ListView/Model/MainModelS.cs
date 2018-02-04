@@ -29,9 +29,9 @@ namespace ListView
         }
 
 
-        internal static async Task<Price> NewYorkPrceAsync()
+        internal static async Task<CityPrice> NewYorkPrceAsync()
         {
-            Price anser = await Getserchi("^DJI");//NewYork Data to Ref.
+            CityPrice anser = await Getserchi("^DJI");//NewYork Data to Ref.
            
             if (NewyorkFlipflop)
             {
@@ -79,13 +79,13 @@ namespace ListView
         /// Getserchi the specified code.
         /// </summary>
         /// <param name="code">Code.</param>
-        public static async Task<Price> Getserchi(string code)
+        public static async Task<CityPrice> Getserchi(string code)
         {
             string Value = null;
             string ValueRatio = null;
             string PercentRatio = null;
          
-            Price price = new Price();
+            CityPrice cityprice = new CityPrice();
 
             string url = "http://stocks.finance.yahoo.co.jp/stocks/detail/?code=" + code;// +".T";
 
@@ -110,7 +110,7 @@ namespace ListView
                 }
                 else
                 {
-                    price.RealValue = 0;// "Error";
+                    cityprice.Realprice = 0;// "Error";
                 }
 
                 string searchWord1 = "yjMSt"; //検索する文字列前日比
@@ -124,7 +124,7 @@ namespace ListView
 
                 if (Convert.ToString(str[foundIndex1 + i1 + 1]) == "-")//(－)下落
                 {
-                    price.Polar = "Green";
+                    cityprice.Polar = "Green";
                 }
 
 
@@ -134,9 +134,9 @@ namespace ListView
                     PercentRatio = PercentRatio + str[foundIndex1 + i1];//previous 前日比? %
                 }
 
-                price.Realprice = Convert.ToDecimal(Value);//現在値
-                price.Prev_day = ValueRatio;//前日比±
-                price.Percent = PercentRatio; //前日比％
+                cityprice.Realprice = Convert.ToDecimal(Value);//現在値
+                cityprice.Prev_day = ValueRatio;//前日比±
+                cityprice.Percent = PercentRatio; //前日比％
                
           
             }
@@ -154,7 +154,7 @@ namespace ListView
                 //}
 
             }
-            return price;// polarity;
+            return cityprice;// polarity;
         }
 
 
