@@ -18,11 +18,11 @@
     
     <StackLayout BackgroundColor="Black" >
        
-                    <StackLayout x:Name="Toplist" Orientation="Vertical">     
+                <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Vertical" Spacing="-8">     
                     <!-- NewYork列全体 -->
                     <StackLayout x:Name="NewYorkLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <Label x:Name="City" 
-                        Text = "NEWYORK"
+                        Text = "$INDN"
                         TextColor = "Yellow"
                         WidthRequest = "250"
                         HorizontalTextAlignment = "Start"
@@ -45,7 +45,7 @@
                     <!-- Tokyo列全体 -->
                     <StackLayout x:Name="TokyoLayout"  Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <Label x:Name="City1"
-                        Text = "TOKYO"
+                        Text = "NI255"
                         TextColor = "Yellow"
                         WidthRequest = "250"
                         HorizontalTextAlignment = "Start"
@@ -63,18 +63,18 @@
                         TextColor = "Black"
                         FontSize="10"/>
                     </StackLayout>
-                    </StackLayout>
+                </StackLayout>
 
                              
                         
-        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "0" >
+        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-0" >
             <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                 <Label x:Name="TitleAsset"
                     Text = "資産状況"
                     TextColor = "White"
                     BackgroundColor="Black"
                     FontSize = "Micro"
-                    WidthRequest = "80"
+                    WidthRequest = "100"
                     HorizontalTextAlignment = "Center"
                     VerticalTextAlignment = "Center"/>
 
@@ -88,6 +88,13 @@
 
                 <Label x:Name="TitleStock"
                     Text = "時価総額"
+                    TextColor = "White"
+                    FontSize = "Micro"
+                    WidthRequest = "100"
+                    HorizontalTextAlignment = "Center"
+                    VerticalTextAlignment = "Center"/>
+                <Label x:Name="Value"
+                    Text = "損益"
                     TextColor = "White"
                     FontSize = "Micro"
                     WidthRequest = "100"
@@ -173,7 +180,7 @@
 
 
 
-        <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="false">
+        <ListView ItemsSource="{Binding ItemList}"  SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

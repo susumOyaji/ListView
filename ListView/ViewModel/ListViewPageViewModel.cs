@@ -33,6 +33,7 @@ namespace ListView
         /// <summary>
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
+        public ICommand NewYorkIncriment { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
 
@@ -195,6 +196,7 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
+            NewYorkIncriment = new CountUpCommand(NewYorkStock);
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
@@ -224,20 +226,21 @@ namespace ListView
             var anser = await Models.Getserchi("^DJI");
             NewYorkStockPrice = anser.Realprice;
             NewYorkStockPercent = anser.Prev_day;
-
+            CurrentColor = "Red";
          
 
             if (anser.Polar == "Green")
             {
-                //CurrentColor = anser.Polar;
-                //NewYorkStockPercent = anser.Percent;
+                CurrentColor = anser.Polar;
+                NewYorkStockPercent = anser.Percent;
                 Polar = anser.Polar;// "Green";
             }
             if (anser.Polar == "Red")
             {
                 View.NewyorkButtonColor();
                 NewYorkStockPercent = "Green";
-                Polar = anser.Polar; //CurrentColor = "Red";
+                Polar = anser.Polar;
+                CurrentColor = "Red";
             }
 
         }

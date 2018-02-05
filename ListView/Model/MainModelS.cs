@@ -253,7 +253,9 @@ namespace ListView
                 }
                 catch (Exception e)
                 {
-                    MessagingCenter.Send(e.Message, "市場が開始していません。", true);
+                    price.Prev_day = "Close";
+                    price.ButtonColor = "Gray";
+                    //MessagingCenter.Send(e.Message, "市場が開始していません。", true);
                     //View.DisplayAlert("XSample", "SelectItem-" , "OK");
                     //Device.BeginInvokeOnMainThread(() =>
                     //{
