@@ -15,7 +15,7 @@ namespace ListView
     class ListViewPageViewModel : ViewModelBase //INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         /// <summary>
         /// View への参照
         /// </summary>
@@ -34,9 +34,9 @@ namespace ListView
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
         public ICommand ItemCommand { protected set; get; }
-       
+        public ICommand RefCommand { protected set; get; }
 
-#region
+        #region
         public ObservableCollection<Price> ItemList { get; set; }
 
         private static decimal _payAssetprice;
@@ -197,6 +197,7 @@ namespace ListView
         {
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
+            RefCommand = new CountUpCommand(IncrementData);
 
             ItemCommand  = new Command<string>((key) =>
             {
@@ -209,8 +210,8 @@ namespace ListView
             NewYorkStock();
             TokyoStock();
 
-            Sample();
-            DispSet();
+            //Sample();
+            DispSet(false);
         }
 
 
@@ -275,16 +276,16 @@ namespace ListView
         {
             View.DisplayAlert("XSample", "SelectItem-"+key, "OK");
             View.NewyorkButtonColor();
-
+            var index = Convert.ToInt32(key);
           
 
-            ButtonColor = "Green";
+            ItemList[index].ButtonColor = "Green";
 
         }
 
              
                
-        private async void Sample()
+        private void Sample()
         {
             //ItemList = new ObservableCollection<Price>();
             //TopList = new ObservableCollection<CityPrice>();
@@ -310,7 +311,7 @@ namespace ListView
 
 
 
-        public async void DispSet()
+        public async void DispSet(bool Refresh)
         {
             int i = 0;
             decimal TotalAssetAdd = 0;
@@ -321,7 +322,10 @@ namespace ListView
            // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
 
-            
+            if (Refresh == true)
+            {
+                ItemList.Clear();// 全て削除
+            }
 
             foreach (Price item in pricesanser)
             {
@@ -331,20 +335,17 @@ namespace ListView
                     Name = item.Name,// "Sony",
                     Stocks = item.Stocks,//保有数*
                     Itemprice = item.Itemprice,// 2015,
+                    Prev_day = item.Prev_day,//前日比±**
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
                     Percent = item.Percent,//前日比％**// "5"
                     ButtonId = i.ToString(),
-                    ButtonColor = "Red"
+                    ButtonColor = item.Polar
                 });
 
                 PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
-
                 TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
-                //Polar = pricesanser[i].Polar;
-
-               // ItemList.Add(item);// item);
-
+               
                 i = ++i;
             }
             PayAssetprice = PayAssetpriceAdd;
@@ -354,6 +355,59 @@ namespace ListView
 
 
         }
+
+
+        public async void RefDispSet()
+        {
+            int i = 0;
+            decimal TotalAssetAdd = 0;
+            decimal PayAssetpriceAdd = 0;
+
+            // UTF8のファイルの書き込み Edit. 
+            string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
+           // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
+            List<Price> priceanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
+
+
+            foreach (Price item in priceanser)
+            {
+                ItemList.Add(new Price
+                {
+                    Name = item.Name,// "Sony",
+                    Stocks = item.Stocks,//保有数*
+                    Itemprice = item.Itemprice,// 2015,
+                    Prev_day = item.Prev_day,//前日比±**
+                    Realprice = item.Realprice,//現在値*// 1000,
+                    RealValue = item.RealValue,// 100,
+                    Percent = item.Percent,//前日比％**// "5"
+                    ButtonId = i.ToString(),
+                    ButtonColor = item.Polar
+
+                });
+                PayAssetpriceAdd = PayAssetpriceAdd + (priceanser[i].Stocks * Convert.ToDecimal(priceanser[i].Itemprice));//株数*購入単価の合計
+                TotalAssetAdd = TotalAssetAdd + (priceanser[i].Stocks * Convert.ToDecimal(priceanser[i].Realprice));//現在評価額
+
+                i = ++i;
+            }
+
+            PayAssetprice = PayAssetpriceAdd;
+            TotalAsset = TotalAssetAdd;
+            UptoAsset = TotalAsset - PayAssetprice;
+
+        }
+
+
+
+        public void IncrementData()
+        {
+            NewYorkStock();
+            TokyoStock();
+            DispSet(true);
+        }
+
+
+
+
 
     }
 }

@@ -222,11 +222,11 @@ namespace ListView
 
                     if (Convert.ToString(str[foundIndex1 + i1 + 1]) == "-")//(－)下落
                     {
-                        price.Polar = "\"Green\"";//(-)
+                        price.Polar = "Green";//(-)
                     }
                     else
                     {
-                        price.Polar = "\"Red\"";//(+)
+                        price.Polar = "Red";//(+)
                     }
 
 
@@ -254,10 +254,10 @@ namespace ListView
                 catch (Exception e)
                 {
                     MessagingCenter.Send(e.Message, "市場が開始していません。", true);
-
+                    //View.DisplayAlert("XSample", "SelectItem-" , "OK");
                     //Device.BeginInvokeOnMainThread(() =>
                     //{
-                       //DisplayAlert(e.Message,"For Client Message ", "OK");
+                    //DisplayAlert(e.Message,"For Client Message ", "OK");
                     //});
                 }
             }
