@@ -14,16 +14,49 @@ namespace ListView
           //NewYorkButton.BackgroundColor = Color.Red;// Polar;// "Red";
         }
 
-        public void NewyorkButtonColor( )
+        public void IndnButtonColor(string color )
         {
 
-            NewyorkButton.BackgroundColor ="#ee00a2e8";// Color.Red;
-            NewyorkButton.BackgroundColor = "Red";// "#ee00a2e8";// Color.Red;
-            //Goingprice.TextColor = "#0000FF";
-            //City.TextColor = "Green";
+            if (color == "Red")
+            {
+                IndnButton.BackgroundColor = Color.Red;
+            }
+
+            if (color == "Green")
+            {
+                IndnButton.BackgroundColor = Color.Green;
+            }
 
         }
 
+        public void Ni255ButtonColor(string color)
+        {
+
+            if (color == "Red")
+            {
+                Ni255Button.BackgroundColor = Color.Red;
+            }
+
+            if (color == "Green")
+            {
+                Ni255Button.BackgroundColor = Color.Green;
+            }
+
+        }
+
+
+        public void GainButtonColor(string color)
+        {
+            if (color == "Red")
+            {
+                GainButton.BackgroundColor = Color.Red;
+            }
+
+            if (color == "Green")
+            {
+                GainButton.BackgroundColor = Color.Green;
+            }
+        }
 
 
 

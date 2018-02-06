@@ -15,7 +15,7 @@ namespace ListView
     class ListViewPageViewModel : ViewModelBase //INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-       
+        bool Flag = true;
         
         /// <summary>
         /// View への参照
@@ -34,7 +34,7 @@ namespace ListView
         /// <summary>
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
-        public ICommand NewYorkIncriment { protected set; get; }
+        public ICommand IndnButtonClick { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
 
@@ -209,7 +209,7 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            NewYorkIncriment = new CountUpCommand(NewYorkStock);
+            IndnButtonClick = new CountUpCommand(Indnswitch);
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
@@ -222,8 +222,8 @@ namespace ListView
             });
          
 
-            NewYorkStock();
-            TokyoStock();
+            IndnStock();
+            Ni255Stock();
 
             //Sample();
             DispSet(false);
@@ -233,42 +233,45 @@ namespace ListView
 
         #region メソッド
 
-        private async void NewYorkStock()
+        Price anser;
+       
+        private async void IndnStock()
         {
-            //CurrentColor = MainModelS.NewyorkButtonColer(CurrentColor);
-            //Price anser = new Price();
-            var anser = await Models.Getserchi("^DJI");
-
-
-            //Stocks = anser.Realprice;
+            anser = await Models.Getserchi("^DJI");
 
             NewYorkStockPrice = anser.Realprice;
-            NewYorkStockPercent = anser.Percent;
-            View.NewyorkButtonColor();
-            ButtonColor = anser.Polar;
-            GainColor = "Green";
+            NewYorkStockPercent = anser.Prev_day;
+            View.IndnButtonColor(anser.Polar);
+        }
 
-            //if (NYorkList.Polar == "Green")
-            //{
-            //    NYorkButtonColor = NYorkList.Polar;
-            //    NewYorkStockPercent = NYorkList.Percent;
-            //    Polar = NYorkList.Polar;// "Green";
-            //}
-            //if (NYorkList.Polar == "Red")
-            //{
-            //    View.NewyorkButtonColor();
-            //    NewYorkStockPercent = "Green";
-            //    Polar = NYorkList.Polar;
-            //    NYorkButtonColor = "Red";
-            //}
+
+        private void Indnswitch()
+        {
+            if (Flag == false)
+            {
+                //Flag = !Flag;
+                NewYorkStockPercent = anser.Prev_day+Flag;
+
+            }
+
+            if (Flag == true)
+            {
+                //Flag = !Flag;
+                NewYorkStockPercent = anser.Percent+Flag;
+               
+            }
 
         }
 
-        private async void TokyoStock()
+
+        private async void Ni255Stock()
         {
             var anser = await Models.Getserchi("998407");
+
             TokyoStockPrice = anser.Realprice;
             TokyoStockPercent = anser.Prev_day;
+            View.Ni255ButtonColor(anser.Polar);
+
 
             if (anser.Polar == "-")
             {
@@ -297,7 +300,7 @@ namespace ListView
         private void OnItemCommand(string key)
         {
             View.DisplayAlert("XSample", "SelectItem-"+key, "OK");
-            View.NewyorkButtonColor();
+
             var index = Convert.ToInt32(key);
           
 
@@ -422,8 +425,8 @@ namespace ListView
 
         public void IncrementData()
         {
-            NewYorkStock();
-            TokyoStock();
+            IndnStock();
+            Ni255Stock();
             DispSet(true);
         }
 

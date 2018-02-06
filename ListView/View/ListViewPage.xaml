@@ -8,11 +8,7 @@
         <vm:ListViewPageViewModel View="{x:Reference page}"/>
     </ContentPage.BindingContext>
 
-    <StackLayout >
-        <Button x:Name="abc"/>
-    </StackLayout>
-
-
+  
   
 
     
@@ -34,12 +30,13 @@
                         WidthRequest = "100"
                         HorizontalTextAlignment = "End"
                         VerticalTextAlignment = "Center"/>
-                <Button x:Name="NewyorkButton"
-                        Command="{Binding NewYorkIncriment}"
+                <Button x:Name="IndnButton"
+                       
+                        Command="{Binding IndnButtonClick}"
                         Text = "{Binding NewYorkStockPercent}"
                         TextColor = "Black"
-                        FontSize="10"
-                        BackgroundColor="Gray"/>
+                        FontSize="10"/>
+                        <!--BackgroundColor="Gray"/>-->
                     </StackLayout>
 
                     <!-- Tokyo列全体 -->
@@ -57,7 +54,7 @@
                         WidthRequest = "100"
                         HorizontalTextAlignment = "End"
                         VerticalTextAlignment = "Center"/>
-                    <Button x:Name="Probability1" 
+                    <Button x:Name="Ni255Button" 
                         Command="{Binding TokyoIncriment}"
                         Text = "{Binding TokyoStockPercent, StringFormat='{0:N1}'}"
                         TextColor = "Black"
