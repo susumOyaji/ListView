@@ -17,8 +17,8 @@
 
     
     <StackLayout BackgroundColor="Black" >
-       
-                <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Vertical" Spacing="-8">     
+
+        <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Vertical" Spacing="-8">     
                     <!-- NewYork列全体 -->
                     <StackLayout x:Name="NewYorkLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <Label x:Name="City" 
@@ -34,7 +34,7 @@
                         WidthRequest = "100"
                         HorizontalTextAlignment = "End"
                         VerticalTextAlignment = "Center"/>
-                    <Button x:Name="NewyorkButton"
+                <Button x:Name="NewyorkButton"
                         Command="{Binding NewYorkIncriment}"
                         Text = "{Binding NewYorkStockPercent}"
                         TextColor = "Black"
@@ -126,9 +126,10 @@
                     HorizontalTextAlignment = "Center"
                     VerticalTextAlignment = "Center"
                     FontSize = "Small"/>
-                <Button
+                <Button x:Name="GainButton"
                     Command="{Binding PersonalUp}"
                     Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
+                    BackgroundColor="Gray"    
                     TextColor="Black"/>
                     <!--"FontAttributes.Bold | FontAttributes.Italic"-->
             </StackLayout>

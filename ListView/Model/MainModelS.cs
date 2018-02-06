@@ -29,9 +29,9 @@ namespace ListView
         }
 
 
-        internal static async Task<CityPrice> NewYorkPrceAsync()
+        internal static async Task<Price> NewYorkPrceAsync()
         {
-            CityPrice anser = await Getserchi("^DJI");//NewYork Data to Ref.
+            Price anser = await Getserchi("^DJI");//NewYork Data to Ref.
            
             if (NewyorkFlipflop)
             {
@@ -79,13 +79,13 @@ namespace ListView
         /// Getserchi the specified code.
         /// </summary>
         /// <param name="code">Code.</param>
-        public static async Task<CityPrice> Getserchi(string code)
+        public static async Task<Price> Getserchi(string code)
         {
             string Value = null;
             string ValueRatio = null;
             string PercentRatio = null;
          
-            CityPrice cityprice = new CityPrice();
+            Price cityprice = new Price();
 
             string url = "http://stocks.finance.yahoo.co.jp/stocks/detail/?code=" + code;// +".T";
 
@@ -126,6 +126,10 @@ namespace ListView
                 {
                     cityprice.Polar = "Green";
                 }
+                else
+                {
+                    cityprice.Polar = "Red";
+                }
 
 
                 i1++;
@@ -142,6 +146,8 @@ namespace ListView
             }
             catch (Exception e)
             {
+                cityprice.Percent = "Close"; //前日比％
+
                 MessagingCenter.Send(e.Message, "市場が開始していません。", true);
 
                 //var accepted = await DisplayAlert(e.Message, "市場が開始していません。", "Ok", "Cancel");
@@ -254,7 +260,7 @@ namespace ListView
                 catch (Exception e)
                 {
                     price.Prev_day = "Close";
-                    price.ButtonColor = "Gray";
+                    price.Polar = "Gray";
                     //MessagingCenter.Send(e.Message, "市場が開始していません。", true);
                     //View.DisplayAlert("XSample", "SelectItem-" , "OK");
                     //Device.BeginInvokeOnMainThread(() =>

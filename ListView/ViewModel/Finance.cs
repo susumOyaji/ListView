@@ -57,6 +57,7 @@ namespace ListView
         public string ButtonId { get; set; }
         public string ButtonColor { get; set; }
 
+
     }
 
     public partial class CityPrice

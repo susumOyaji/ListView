@@ -7,7 +7,6 @@ namespace ListView
         public ListViewPage()
         {
             InitializeComponent();
-             abc.TextColor = Color.Red;// Polar;// "Red";
         }
 
         public static void ChangeButtonColor()
@@ -17,8 +16,9 @@ namespace ListView
 
         public void NewyorkButtonColor( )
         {
-            
-            NewyorkButton.BackgroundColor = Color.Red;
+
+            NewyorkButton.BackgroundColor ="#ee00a2e8";// Color.Red;
+            NewyorkButton.BackgroundColor = "Red";// "#ee00a2e8";// Color.Red;
             //Goingprice.TextColor = "#0000FF";
             //City.TextColor = "Green";
 

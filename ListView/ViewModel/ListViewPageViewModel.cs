@@ -15,6 +15,7 @@ namespace ListView
     class ListViewPageViewModel : ViewModelBase //INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+       
         
         /// <summary>
         /// View への参照
@@ -123,13 +124,13 @@ namespace ListView
 
 
         private static string _currentColor;
-        public string CurrentColor
+        public string NYorkButtonColor
         {
             get { return _currentColor; }
             set
             {
                 _currentColor = value;
-                this.OnPropertyChanged(nameof(CurrentColor));
+                this.OnPropertyChanged(nameof(NYorkButtonColor));
             }
         }
 
@@ -168,6 +169,18 @@ namespace ListView
             }
         }
 
+
+
+        private static string _gainColor;
+        public string GainColor
+        {
+            get { return _gainColor; }
+            set
+            {
+                _gainColor = value;
+                this.OnPropertyChanged(nameof(GainColor));
+            }
+        }
 
 
         private static string inputString = "";
@@ -218,30 +231,36 @@ namespace ListView
 
 
 
-#region メソッド
+        #region メソッド
 
         private async void NewYorkStock()
         {
             //CurrentColor = MainModelS.NewyorkButtonColer(CurrentColor);
+            //Price anser = new Price();
             var anser = await Models.Getserchi("^DJI");
-            NewYorkStockPrice = anser.Realprice;
-            NewYorkStockPercent = anser.Prev_day;
-            CurrentColor = "Red";
-         
 
-            if (anser.Polar == "Green")
-            {
-                CurrentColor = anser.Polar;
-                NewYorkStockPercent = anser.Percent;
-                Polar = anser.Polar;// "Green";
-            }
-            if (anser.Polar == "Red")
-            {
-                View.NewyorkButtonColor();
-                NewYorkStockPercent = "Green";
-                Polar = anser.Polar;
-                CurrentColor = "Red";
-            }
+
+            //Stocks = anser.Realprice;
+
+            NewYorkStockPrice = anser.Realprice;
+            NewYorkStockPercent = anser.Percent;
+            View.NewyorkButtonColor();
+            ButtonColor = anser.Polar;
+            GainColor = "Green";
+
+            //if (NYorkList.Polar == "Green")
+            //{
+            //    NYorkButtonColor = NYorkList.Polar;
+            //    NewYorkStockPercent = NYorkList.Percent;
+            //    Polar = NYorkList.Polar;// "Green";
+            //}
+            //if (NYorkList.Polar == "Red")
+            //{
+            //    View.NewyorkButtonColor();
+            //    NewYorkStockPercent = "Green";
+            //    Polar = NYorkList.Polar;
+            //    NYorkButtonColor = "Red";
+            //}
 
         }
 
@@ -254,12 +273,12 @@ namespace ListView
             if (anser.Polar == "-")
             {
                 //NewYorkStockPercent = anser.Percent;
-                CurrentColor = "Green";
+                NYorkButtonColor = "Green";
             }
             if (anser.Polar == "+")
             {
                 //NewYorkStockPercent = Dayratio;
-                CurrentColor = "Red";
+                NYorkButtonColor = "Red";
             }
 
         }
