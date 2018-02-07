@@ -141,7 +141,7 @@ namespace ListView
                 cityprice.Realprice = Convert.ToDecimal(Value);//現在値
                 cityprice.Prev_day = ValueRatio;//前日比±
                 cityprice.Percent = PercentRatio; //前日比％
-               
+                             
           
             }
             catch (Exception e)

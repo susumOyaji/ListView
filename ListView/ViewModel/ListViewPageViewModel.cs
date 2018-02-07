@@ -40,6 +40,7 @@ namespace ListView
 
         #region
         public ObservableCollection<Price> ItemList { get; set; }
+        public ObservableCollection<Price> ItemStd { get; set; }
 
         private static decimal _payAssetprice;
         public decimal PayAssetprice//保有数* 購入価格 = 投資総額
@@ -200,7 +201,23 @@ namespace ListView
          }
 
 
-#endregion
+        public static string _percent;
+        public string Percent
+        {
+            get { return _percent; }
+            set
+            {
+                if (_percent != value)
+                {
+                    _percent = value;
+                }
+                _percent = value;
+                this.OnPropertyChanged(nameof(Percent));
+            }
+        }
+
+
+        #endregion
 
 
 
@@ -209,9 +226,10 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            IndnButtonClick = new CountUpCommand(Indnswitch);
+            IndnButtonClick = new Command(Indnswitch);
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
+            ItemStd = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
 
             ItemCommand  = new Command<string>((key) =>
@@ -222,8 +240,8 @@ namespace ListView
             });
          
 
-            IndnStock();
-            Ni255Stock();
+            StdStock();
+           // Ni255Stock();
 
             //Sample();
             DispSet(false);
@@ -233,34 +251,53 @@ namespace ListView
 
         #region メソッド
 
-        Price anser;
+      
        
-        private async void IndnStock()
+        private async void StdStock()
         {
-            anser = await Models.Getserchi("^DJI");
+            int i=0;
+            Price IndnAnser = await Models.Getserchi("^DJI");
+            Price Ni255Anser = await Models.Getserchi("998407");
 
-            NewYorkStockPrice = anser.Realprice;
-            NewYorkStockPercent = anser.Prev_day;
-            View.IndnButtonColor(anser.Polar);
+
+            ItemStd.Clear();// 全て削除
+
+            ItemStd.Add(new Price
+            {
+                Prev_day = IndnAnser.Prev_day,//前日比±**
+                Realprice = IndnAnser.Realprice,//現在値*
+                Percent = IndnAnser.Percent,//前日比％**// "5"
+                ButtonId = i.ToString(),
+                ButtonColor = IndnAnser.Polar
+            });
+            i = i++;
+
+            ItemStd.Add(new Price
+            {
+                Name = Ni255Anser.Name,// "Sony",
+                Itemprice = Ni255Anser.Itemprice,// 2015,
+                Prev_day = Ni255Anser.Prev_day,//前日比±**
+                Realprice = Ni255Anser.Realprice,//現在値*
+                Percent = IndnAnser.Percent,//前日比％**// "5"
+                ButtonId = i.ToString(),
+                ButtonColor = Ni255Anser.Polar
+            });
+           
         }
 
 
         private void Indnswitch()
         {
-            if (Flag == false)
+           if(ItemStd[0].Percent == ItemStd[0].Percent)
             {
-                //Flag = !Flag;
-                NewYorkStockPercent = anser.Prev_day+Flag;
-
+                Percent= ItemStd[0].Prev_day;
             }
-
-            if (Flag == true)
+            else
             {
-                //Flag = !Flag;
-                NewYorkStockPercent = anser.Percent+Flag;
-               
+                Percent = ItemStd[0].Percent;
             }
-
+           
+            //ItemStd.Insert(0, ItemStd[0]);
         }
 
 
@@ -270,7 +307,7 @@ namespace ListView
 
             TokyoStockPrice = anser.Realprice;
             TokyoStockPercent = anser.Prev_day;
-            View.Ni255ButtonColor(anser.Polar);
+            //View.Ni255ButtonColor(anser.Polar);
 
 
             if (anser.Polar == "-")
@@ -425,8 +462,8 @@ namespace ListView
 
         public void IncrementData()
         {
-            IndnStock();
-            Ni255Stock();
+            StdStock();
+           // Ni255Stock();
             DispSet(true);
         }
 

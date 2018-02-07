@@ -9,56 +9,5 @@ namespace ListView
             InitializeComponent();
         }
 
-        public static void ChangeButtonColor()
-        {
-          //NewYorkButton.BackgroundColor = Color.Red;// Polar;// "Red";
-        }
-
-        public void IndnButtonColor(string color )
-        {
-
-            if (color == "Red")
-            {
-                IndnButton.BackgroundColor = Color.Red;
-            }
-
-            if (color == "Green")
-            {
-                IndnButton.BackgroundColor = Color.Green;
-            }
-
-        }
-
-        public void Ni255ButtonColor(string color)
-        {
-
-            if (color == "Red")
-            {
-                Ni255Button.BackgroundColor = Color.Red;
-            }
-
-            if (color == "Green")
-            {
-                Ni255Button.BackgroundColor = Color.Green;
-            }
-
-        }
-
-
-        public void GainButtonColor(string color)
-        {
-            if (color == "Red")
-            {
-                GainButton.BackgroundColor = Color.Red;
-            }
-
-            if (color == "Green")
-            {
-                GainButton.BackgroundColor = Color.Green;
-            }
-        }
-
-
-
     }
 }

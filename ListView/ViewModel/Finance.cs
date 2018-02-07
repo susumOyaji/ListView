@@ -60,15 +60,4 @@ namespace ListView
 
     }
 
-    public partial class CityPrice
-    {
-        public string Name { get; set; }//会社名*
-        public decimal Realprice { get; set; }//現在値**
-        public string Prev_day { get; set; }//前日比±**
-        public string Percent { get; set; }//前日比％**
-        public string Polar { get; set; }//上げ下げ(+ or -)
-        public decimal NewYorkStockPrice { get; internal set; }
-    }
-
-
 }

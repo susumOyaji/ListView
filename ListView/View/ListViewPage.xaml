@@ -13,57 +13,39 @@
 
     
     <StackLayout BackgroundColor="Black" >
-
-        <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Vertical" Spacing="-8">     
-                    <!-- NewYork列全体 -->
-                    <StackLayout x:Name="NewYorkLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                    <Label x:Name="City" 
-                        Text = "$INDN"
-                        TextColor = "Yellow"
-                        WidthRequest = "250"
-                        HorizontalTextAlignment = "Start"
-                        VerticalTextAlignment = "Center"
-                        FontSize = "15"/>
-                    <Label x:Name="Goingprice"
-                        Text = "{Binding NewYorkStockPrice, StringFormat='{0:N1}'}"
-                        TextColor = "White"
-                        WidthRequest = "100"
-                        HorizontalTextAlignment = "End"
-                        VerticalTextAlignment = "Center"/>
-                <Button x:Name="IndnButton"
+        <ListView ItemsSource="{Binding ItemStd}" RowHeight="50"  HasUnevenRows="false">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="-10">     
+                            <!-- NewYork列全体 -->
+                                <Label x:Name="City" 
+                                    Text = "$INDN"
+                                    TextColor = "Yellow"
+                                    WidthRequest = "250"
+                                    HorizontalTextAlignment = "Start"
+                                    VerticalTextAlignment = "Center"
+                                    FontSize = "15"/>
+                                <Label x:Name="Goingprice"
+                                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
+                                    TextColor = "White"
+                                    WidthRequest = "100"
+                                    HorizontalTextAlignment = "End"
+                                    VerticalTextAlignment = "Center"/>
+                                <Button x:Name="IndnButton"
                        
-                        Command="{Binding IndnButtonClick}"
-                        Text = "{Binding NewYorkStockPercent}"
-                        TextColor = "Black"
-                        FontSize="10"/>
-                        <!--BackgroundColor="Gray"/>-->
-                    </StackLayout>
+                                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
+                                    Text = "{Binding Prev_day}"
+                                    TextColor = "Black"
+                                    FontSize="10"
+                                    BackgroundColor="{Binding ButtonColor}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-                    <!-- Tokyo列全体 -->
-                    <StackLayout x:Name="TokyoLayout"  Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                    <Label x:Name="City1"
-                        Text = "NI255"
-                        TextColor = "Yellow"
-                        WidthRequest = "250"
-                        HorizontalTextAlignment = "Start"
-                        VerticalTextAlignment = "Center"
-                        FontSize = "15"/>
-                    <Label x:Name="Goingprice1"
-                        Text = "{Binding TokyoStockPrice, StringFormat='{0:N1}'}"
-                        TextColor = "White"
-                        WidthRequest = "100"
-                        HorizontalTextAlignment = "End"
-                        VerticalTextAlignment = "Center"/>
-                    <Button x:Name="Ni255Button" 
-                        Command="{Binding TokyoIncriment}"
-                        Text = "{Binding TokyoStockPercent, StringFormat='{0:N1}'}"
-                        TextColor = "Black"
-                        FontSize="10"/>
-                    </StackLayout>
-                </StackLayout>
 
-                             
-                        
         <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-0" >
             <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                 <Label x:Name="TitleAsset"
@@ -126,7 +108,7 @@
                 <Button x:Name="GainButton"
                     Command="{Binding PersonalUp}"
                     Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
-                    BackgroundColor="Gray"    
+                    BackgroundColor="Orange"    
                     TextColor="Black"/>
                     <!--"FontAttributes.Bold | FontAttributes.Italic"-->
             </StackLayout>
@@ -141,6 +123,8 @@
                  HeightRequest="3"
                  Grid.Row="1" Grid.Column="0" />
         </StackLayout>
+        
+        
         <!-- Button -->
         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
             <Button x:Name="AddButton"
@@ -162,17 +146,6 @@
                 WidthRequest = "60"
                 HeightRequest = "40"/>
         </StackLayout>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
