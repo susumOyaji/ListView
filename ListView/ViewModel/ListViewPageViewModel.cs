@@ -15,8 +15,7 @@ namespace ListView
     class ListViewPageViewModel : ViewModelBase //INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        bool Flag = true;
-        
+
         /// <summary>
         /// View への参照
         /// </summary>
@@ -139,7 +138,7 @@ namespace ListView
         private static decimal _uptoAsset;
         public decimal UptoAsset
         {
-            get { return _uptoAsset;}
+            get { return _uptoAsset; }
             set
             {
                 _uptoAsset = value;
@@ -198,7 +197,7 @@ namespace ListView
                 inputString = value;
                 this.OnPropertyChanged(nameof(InputString));
             }
-         }
+        }
 
 
         public static string _percent;
@@ -226,22 +225,22 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            IndnButtonClick = new Command(Indnswitch);
+            IndnButtonClick = new CountUpCommand(Indnswitch);
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
             ItemStd = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
 
-            ItemCommand  = new Command<string>((key) =>
-            {
+            ItemCommand = new Command<string>((key) =>
+           {
                 // Add the key to the input string.
                 //InputString += key;
                 OnItemCommand(key);
-            });
-         
+           });
+
 
             StdStock();
-           // Ni255Stock();
+            // Ni255Stock();
 
             //Sample();
             DispSet(false);
@@ -251,11 +250,11 @@ namespace ListView
 
         #region メソッド
 
-      
-       
+
+
         private async void StdStock()
         {
-            int i=0;
+            int i = 0;
             Price IndnAnser = await Models.Getserchi("^DJI");
             Price Ni255Anser = await Models.Getserchi("998407");
 
@@ -264,6 +263,7 @@ namespace ListView
 
             ItemStd.Add(new Price
             {
+                Name = IndnAnser.Name,
                 Prev_day = IndnAnser.Prev_day,//前日比±**
                 Realprice = IndnAnser.Realprice,//現在値*
                 Percent = IndnAnser.Percent,//前日比％**// "5"
@@ -282,21 +282,21 @@ namespace ListView
                 ButtonId = i.ToString(),
                 ButtonColor = Ni255Anser.Polar
             });
-           
+
         }
 
 
         private void Indnswitch()
         {
-           if(ItemStd[0].Percent == ItemStd[0].Percent)
+             if (true)
             {
-                Percent= ItemStd[0].Prev_day;
+                ItemStd[0].Percent = ItemStd[0].Prev_day;
             }
             else
             {
                 Percent = ItemStd[0].Percent;
             }
-           
+
             //ItemStd.Insert(0, ItemStd[0]);
         }
 
@@ -326,7 +326,7 @@ namespace ListView
         #endregion
 
         //public ICommand Loss { get; } //ListView の各 Item 内の Button にバインディングする Command
-     
+
 
 
 
@@ -336,17 +336,17 @@ namespace ListView
         /// <param name="parameter"></param>
         private void OnItemCommand(string key)
         {
-            View.DisplayAlert("XSample", "SelectItem-"+key, "OK");
+            View.DisplayAlert("XSample", "SelectItem-" + key, "OK");
 
             var index = Convert.ToInt32(key);
-          
 
-            ItemList[index].ButtonColor = "Green";
 
+            ItemStd[index].ButtonColor = "Green";
+            //ItemList[0].notifyDataSetChanged();
         }
 
-             
-               
+
+
         private void Sample()
         {
             //ItemList = new ObservableCollection<Price>();
@@ -367,7 +367,7 @@ namespace ListView
 
         }
 
-     
+
 
 
 
@@ -381,7 +381,7 @@ namespace ListView
 
             // UTF8のファイルの書き込み Edit. 
             string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
-           // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
+                                                                                                             // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
 
             if (Refresh == true)
@@ -407,7 +407,7 @@ namespace ListView
 
                 PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
                 TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
-               
+
                 i = ++i;
             }
             PayAssetprice = PayAssetpriceAdd;
@@ -427,7 +427,7 @@ namespace ListView
 
             // UTF8のファイルの書き込み Edit. 
             string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
-           // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
+                                                                                                             // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> priceanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
 
 
@@ -463,7 +463,7 @@ namespace ListView
         public void IncrementData()
         {
             StdStock();
-           // Ni255Stock();
+            // Ni255Stock();
             DispSet(true);
         }
 

@@ -13,38 +13,53 @@
 
     
     <StackLayout BackgroundColor="Black" >
-        <ListView ItemsSource="{Binding ItemStd}" RowHeight="50"  HasUnevenRows="false">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout x:Name="Toplist" Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="-10">     
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout x:Name="Toplist"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="-0">     
                             <!-- NewYork列全体 -->
                                 <Label x:Name="City" 
-                                    Text = "$INDN"
+                                    Text = "Indn"
                                     TextColor = "Yellow"
-                                    WidthRequest = "250"
+                                    WidthRequest = "150"
                                     HorizontalTextAlignment = "Start"
                                     VerticalTextAlignment = "Center"
                                     FontSize = "15"/>
                                 <Label x:Name="Goingprice"
                                     Text = "{Binding Realprice, StringFormat='{0:N1}'}"
                                     TextColor = "White"
-                                    WidthRequest = "100"
+                                    WidthRequest = "150"
                                     HorizontalTextAlignment = "End"
                                     VerticalTextAlignment = "Center"/>
                                 <Button x:Name="IndnButton"
-                       
                                     Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
                                     Text = "{Binding Prev_day}"
                                     TextColor = "Black"
                                     FontSize="10"
-                                    BackgroundColor="{Binding ButtonColor}"/>
+                                    BackgroundColor="Gray"/>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
 
+                        <StackLayout x:Name="Ni255list"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="-0">     
+                            <!-- Ni255列全体 -->
+                                <Label x:Name="Ni255" 
+                                    Text = "Ni255"
+                                    TextColor = "Yellow"
+                                    WidthRequest = "150"
+                                    HorizontalTextAlignment = "Start"
+                                    VerticalTextAlignment = "Center"
+                                    FontSize = "15"/>
+                                <Label x:Name="Ni255Goingprice"
+                                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
+                                    TextColor = "White"
+                                    WidthRequest = "150"
+                                    HorizontalTextAlignment = "End"
+                                    VerticalTextAlignment = "Center"/>
+                                <Button x:Name="Ni255IndnButton"
+                                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
+                                    Text = "{Binding Prev_day}"
+                                    TextColor = "Black"
+                                    FontSize="10"
+                                    BackgroundColor="Gray"/>
+                        </StackLayout>
+                    </StackLayout>
 
         <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-0" >
             <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">

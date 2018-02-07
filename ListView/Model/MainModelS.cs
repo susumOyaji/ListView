@@ -137,7 +137,7 @@ namespace ListView
                 {
                     PercentRatio = PercentRatio + str[foundIndex1 + i1];//previous 前日比? %
                 }
-
+                cityprice.Name = code;
                 cityprice.Realprice = Convert.ToDecimal(Value);//現在値
                 cityprice.Prev_day = ValueRatio;//前日比±
                 cityprice.Percent = PercentRatio; //前日比％
@@ -147,18 +147,8 @@ namespace ListView
             catch (Exception e)
             {
                 cityprice.Percent = "Close"; //前日比％
-
+                cityprice.Polar = "Gray";
                 MessagingCenter.Send(e.Message, "市場が開始していません。", true);
-
-                //var accepted = await DisplayAlert(e.Message, "市場が開始していません。", "Ok", "Cancel");
-                //if (accepted== true)
-                //{
-                //    Application.Current.MainPage = new WebSerchi();
-                //    //Navigation.InsertPageBefore(new WebSerchi(), this);
-                //    //buttonDialog1.Text = "Accepted!";
-                //    //break;
-                //}
-
             }
             return cityprice;// polarity;
         }
@@ -261,12 +251,6 @@ namespace ListView
                 {
                     price.Prev_day = "Close";
                     price.Polar = "Gray";
-                    //MessagingCenter.Send(e.Message, "市場が開始していません。", true);
-                    //View.DisplayAlert("XSample", "SelectItem-" , "OK");
-                    //Device.BeginInvokeOnMainThread(() =>
-                    //{
-                    //DisplayAlert(e.Message,"For Client Message ", "OK");
-                    //});
                 }
             }
 
