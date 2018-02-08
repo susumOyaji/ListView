@@ -236,7 +236,7 @@ namespace ListView
                     price.Prev_day = YenRatio;//前日比±
                     price.Percent = PercentRatio; //前日比％
                     price.PayAssetprice = price.Stocks * price.Itemprice;//株数*購入単価
-
+                    price.Gain = (price.Realprice - price.Itemprice)*price.Stocks;//損益
                     price.RealValue = (price.Stocks * price.Realprice);//個別利益
 
 

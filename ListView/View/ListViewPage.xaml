@@ -13,55 +13,65 @@
 
     
     <StackLayout BackgroundColor="Black" >
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout x:Name="Toplist"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="-0">     
-                            <!-- NewYork列全体 -->
-                                <Label x:Name="City" 
-                                    Text = "Indn"
-                                    TextColor = "Yellow"
-                                    WidthRequest = "150"
-                                    HorizontalTextAlignment = "Start"
-                                    VerticalTextAlignment = "Center"
-                                    FontSize = "15"/>
-                                <Label x:Name="Goingprice"
-                                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
-                                    TextColor = "White"
-                                    WidthRequest = "150"
-                                    HorizontalTextAlignment = "End"
-                                    VerticalTextAlignment = "Center"/>
-                                <Button x:Name="IndnButton"
-                                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
-                                    Text = "{Binding Prev_day}"
-                                    TextColor = "Black"
-                                    FontSize="10"
-                                    BackgroundColor="Gray"/>
-                        </StackLayout>
+        <StackLayout Orientation="Vertical" Spacing="-8">
+            <StackLayout x:Name="Toplist"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >     
+                <!-- NewYork列全体 -->
+                <Label x:Name="City" 
+                    Text = "$Indn"
+                    TextColor = "Yellow"
+                    WidthRequest = "150"
+                    HorizontalTextAlignment = "Start"
+                    VerticalTextAlignment = "Center"
+                    FontSize = "15"/>
+                <Label x:Name="Goingprice"
+                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
+                    TextColor = "White"
+                    WidthRequest = "150"
+                    HorizontalTextAlignment = "End"
+                    VerticalTextAlignment = "Center"/>
+                <Button x:Name="IndnButton"
+                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
+                    Text = "{Binding WhichOne}"
+                    TextColor = "Black"
+                    FontSize="10"
+                    BackgroundColor="Gray"/>
+            </StackLayout>
 
-                        <StackLayout x:Name="Ni255list"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="-0">     
-                            <!-- Ni255列全体 -->
-                                <Label x:Name="Ni255" 
-                                    Text = "Ni255"
-                                    TextColor = "Yellow"
-                                    WidthRequest = "150"
-                                    HorizontalTextAlignment = "Start"
-                                    VerticalTextAlignment = "Center"
-                                    FontSize = "15"/>
-                                <Label x:Name="Ni255Goingprice"
-                                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
-                                    TextColor = "White"
-                                    WidthRequest = "150"
-                                    HorizontalTextAlignment = "End"
-                                    VerticalTextAlignment = "Center"/>
-                                <Button x:Name="Ni255IndnButton"
-                                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
-                                    Text = "{Binding Prev_day}"
-                                    TextColor = "Black"
-                                    FontSize="10"
-                                    BackgroundColor="Gray"/>
-                        </StackLayout>
-                    </StackLayout>
+            <StackLayout x:Name="Ni255list"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >     
+                <!-- Ni255列全体 -->
+                <Label x:Name="Ni255" 
+                    Text = "Ni255"
+                    TextColor = "Yellow"
+                    WidthRequest = "150"
+                    HorizontalTextAlignment = "Start"
+                    VerticalTextAlignment = "Center"
+                    FontSize = "15"/>
+                <Label x:Name="Ni255Goingprice"
+                    Text = "{Binding Ni255Realprice, StringFormat='{0:N1}'}"
+                    TextColor = "White"
+                    WidthRequest = "150"
+                    HorizontalTextAlignment = "End"
+                    VerticalTextAlignment = "Center"/>
+                <Button x:Name="Ni255Button"
+                    Command="{Binding BindingContext.Ni255ButtonClick, Source={x:Reference page}}"
+                    Text = "{Binding Ni255WhichOne}"
+                    TextColor = "Black"
+                    FontSize="10"
+                    BackgroundColor="Gray"/>
+            </StackLayout>
+        </StackLayout>
 
-        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-0" >
+        <!-- 境界線 -->
+        <StackLayout>
+            <BoxView Color="#fff"
+                 HeightRequest="3"
+                 Grid.Row="1" Grid.Column="0" />
+        </StackLayout>
+
+
+
+
+        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-5" >
             <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                 <Label x:Name="TitleAsset"
                     Text = "資産状況"
@@ -70,7 +80,7 @@
                     FontSize = "Micro"
                     WidthRequest = "100"
                     HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"/>
+                    VerticalTextAlignment = "Start"/>
 
                 <Label x:Name="TitleTotal"
                     Text = "投資総額"
@@ -78,7 +88,7 @@
                     FontSize = "Micro"
                     WidthRequest = "100"
                     HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"/>
+                    VerticalTextAlignment = "Start"/>
 
                 <Label x:Name="TitleStock"
                     Text = "時価総額"
@@ -86,14 +96,14 @@
                     FontSize = "Micro"
                     WidthRequest = "100"
                     HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"/>
+                    VerticalTextAlignment = "Start"/>
                 <Label x:Name="Value"
                     Text = "損益"
                     TextColor = "White"
                     FontSize = "Micro"
                     WidthRequest = "100"
                     HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"/>
+                    VerticalTextAlignment = "Start"/>
             </StackLayout>
 
 
@@ -132,12 +142,6 @@
 
                         
 
-        <!-- 境界線 -->
-        <StackLayout>
-            <BoxView Color="#fff"
-                 HeightRequest="3"
-                 Grid.Row="1" Grid.Column="0" />
-        </StackLayout>
         
         
         <!-- Button -->
@@ -183,12 +187,6 @@
                                         HeightRequest="50"       
                                         HorizontalTextAlignment = "Start"
                                         VerticalTextAlignment = "End"/>
-                                    <Label  Text = "Stock"
-                                        TextColor="Red"
-                                        FontSize="Micro"
-                                        WidthRequest = "50"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
                                     <Label  Text = "Itemprice"
                                         TextColor="Gray"
                                         FontSize="Micro" 
@@ -198,6 +196,12 @@
                                         VerticalTextAlignment = "End"/>
                                     <Label  Text = "Realprice"
                                         TextColor="Gray"
+                                        FontSize="Micro"
+                                        WidthRequest = "50"
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "End"/>
+                                    <Label  Text = "Gain"
+                                        TextColor="Red"
                                         FontSize="Micro"
                                         WidthRequest = "50"
                                         HorizontalTextAlignment = "Start"
@@ -221,14 +225,7 @@
                                         WidthRequest = "50"
                                         HorizontalTextAlignment = "Start"/>
                                    
-                                    <!-- 数量 > -->
-                                    <Label x:Name= "Stock"
-                                        Text = "{Binding Path= Stocks}"
-                                        TextColor = "White"
-                                        WidthRequest = "50"   
-                                        HorizontalOptions="StartAndExpand"   
-                                        HorizontalTextAlignment = "Start"/>
-
+                                    
 
                                     <Label x:Name= "Itemprice"
                                         Text = "{Binding Itemprice}"
@@ -245,9 +242,16 @@
                                         WidthRequest = "50"   
                                         HorizontalOptions="StartAndExpand"    
                                         HorizontalTextAlignment = "Start"/>
+                                    <!-- 損益 -->
+                                    <Label x:Name= "Gain"
+                                        Text = "{Binding Path= Gain, StringFormat='{0:N1}'}"
+                                        TextColor = "White"
+                                        WidthRequest = "50"
+                                        FontSize="Micro"   
+                                        HorizontalOptions="StartAndExpand"   
+                                        HorizontalTextAlignment = "Start"/>
 
-
-                                    <Label x:Name= "RealValue"
+                                    <Label x:Name= "MarketCapitalization"
                                         Text = "{Binding RealValue}"
                                         TextColor = "White"
                                         FontSize="Micro"  

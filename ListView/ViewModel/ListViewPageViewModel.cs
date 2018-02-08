@@ -34,12 +34,13 @@ namespace ListView
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
         public ICommand IndnButtonClick { protected set; get; }
+        public ICommand Ni255ButtonClick { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
 
         #region
         public ObservableCollection<Price> ItemList { get; set; }
-        public ObservableCollection<Price> ItemStd { get; set; }
+       // public ObservableCollection<Price> ItemStd { get; set; }
 
         private static decimal _payAssetprice;
         public decimal PayAssetprice//保有数* 購入価格 = 投資総額
@@ -64,51 +65,51 @@ namespace ListView
 
         }
 
-        private static decimal _currentStockPrice;
-        public decimal NewYorkStockPrice
-        {
-            get { return _currentStockPrice; }
-            set
-            {
-                _currentStockPrice = value;
-                this.OnPropertyChanged(nameof(NewYorkStockPrice));
-            }
-        }
+        //private static decimal _currentStockPrice;
+        //public decimal NewYorkStockPrice
+        //{
+        //    get { return _currentStockPrice; }
+        //    set
+        //    {
+        //        _currentStockPrice = value;
+        //        this.OnPropertyChanged(nameof(NewYorkStockPrice));
+        //    }
+        //}
 
 
 
-        private static string _currentStockPercent;
-        public string NewYorkStockPercent
-        {
-            get { return _currentStockPercent; }
-            set
-            {
-                _currentStockPercent = value;
-                this.OnPropertyChanged(nameof(NewYorkStockPercent));
-            }
-        }
+        //private static string _currentStockPercent;
+        //public string NewYorkStockPercent
+        //{
+        //    get { return _currentStockPercent; }
+        //    set
+        //    {
+        //        _currentStockPercent = value;
+        //        this.OnPropertyChanged(nameof(NewYorkStockPercent));
+        //    }
+        //}
 
-        private static decimal _currentTokyoStockPrice;
-        public decimal TokyoStockPrice
-        {
-            get { return _currentTokyoStockPrice; }
-            set
-            {
-                _currentTokyoStockPrice = value;
-                this.OnPropertyChanged(nameof(TokyoStockPrice));
-            }
-        }
+        //private static decimal _currentTokyoStockPrice;
+        //public decimal TokyoStockPrice
+        //{
+        //    get { return _currentTokyoStockPrice; }
+        //    set
+        //    {
+        //        _currentTokyoStockPrice = value;
+        //        this.OnPropertyChanged(nameof(TokyoStockPrice));
+        //    }
+        //}
 
-        private static string _currentTokyoStockPercent;
-        public string TokyoStockPercent
-        {
-            get { return _currentTokyoStockPercent; }
-            set
-            {
-                _currentTokyoStockPercent = value;
-                this.OnPropertyChanged(nameof(TokyoStockPercent));
-            }
-        }
+        //private static string _currentTokyoStockPercent;
+        //public string TokyoStockPercent
+        //{
+        //    get { return _currentTokyoStockPercent; }
+        //    set
+        //    {
+        //        _currentTokyoStockPercent = value;
+        //        this.OnPropertyChanged(nameof(TokyoStockPercent));
+        //    }
+        //}
 
         private static string _polar;
         public string Polar//(-)下落
@@ -123,16 +124,16 @@ namespace ListView
         }
 
 
-        private static string _currentColor;
-        public string NYorkButtonColor
-        {
-            get { return _currentColor; }
-            set
-            {
-                _currentColor = value;
-                this.OnPropertyChanged(nameof(NYorkButtonColor));
-            }
-        }
+        //private static string _currentColor;
+        //public string NYorkButtonColor
+        //{
+        //    get { return _currentColor; }
+        //    set
+        //    {
+        //        _currentColor = value;
+        //        this.OnPropertyChanged(nameof(NYorkButtonColor));
+        //    }
+        //}
 
 
         private static decimal _uptoAsset;
@@ -147,8 +148,8 @@ namespace ListView
         }
 
 
-        private static string _id;
-        public string ButtonId//保有数*
+        private static int _id;
+        public int ButtonId//保有数*
         {
             get { return _id; }
             set
@@ -158,29 +159,29 @@ namespace ListView
             }
         }
 
-        private static string _buttonColor;
-        public string ButtonColor
-        {
-            get { return _buttonColor; }
-            set
-            {
-                _buttonColor = value;
-                this.OnPropertyChanged(nameof(ButtonColor));
-            }
-        }
+        //private static string _buttonColor;
+        //public string ButtonColor
+        //{
+        //    get { return _buttonColor; }
+        //    set
+        //    {
+        //        _buttonColor = value;
+        //        this.OnPropertyChanged(nameof(ButtonColor));
+        //    }
+        //}
 
 
 
-        private static string _gainColor;
-        public string GainColor
-        {
-            get { return _gainColor; }
-            set
-            {
-                _gainColor = value;
-                this.OnPropertyChanged(nameof(GainColor));
-            }
-        }
+        //private static string _gainColor;
+        //public string GainColor
+        //{
+        //    get { return _gainColor; }
+        //    set
+        //    {
+        //        _gainColor = value;
+        //        this.OnPropertyChanged(nameof(GainColor));
+        //    }
+        //}
 
 
         private static string inputString = "";
@@ -216,6 +217,126 @@ namespace ListView
         }
 
 
+
+     
+        public static string _prev_day;
+        public string Prev_day
+        {
+            get { return _prev_day; }
+            set
+            {
+                if (_prev_day != value)
+                {
+                    _prev_day = value;
+                }
+                _prev_day = value;
+                this.OnPropertyChanged(nameof(Prev_day));
+            }
+        }
+
+
+       
+        public static decimal _realprice;
+        public decimal Realprice
+        {
+            get { return _realprice; }
+            set
+            {
+                if (_realprice!= value)
+                {
+                    _realprice= value;
+                }
+                _realprice= value;
+                this.OnPropertyChanged(nameof(Realprice));
+            }
+        }
+
+        public static string _whichOn;
+        public string WhichOne
+        {
+            get { return _whichOn; }
+            set
+            {
+                if (_whichOn!= value)
+                {
+                    _whichOn= value;
+                }
+                _whichOn= value;
+                this.OnPropertyChanged(nameof(WhichOne));
+            }
+        }
+
+
+        //Ni255
+
+        public static string _Ni255percent;
+        public string Ni255Percent
+        {
+            get { return _Ni255percent; }
+            set
+            {
+                if (_Ni255percent != value)
+                {
+                    _Ni255percent = value;
+                }
+                _Ni255percent = value;
+                this.OnPropertyChanged(nameof(Ni255Percent));
+            }
+        }
+
+
+
+
+        public static string _Ni255prev_day;
+        public string Ni255Prev_day
+        {
+            get { return _Ni255prev_day; }
+            set
+            {
+                if (_Ni255prev_day != value)
+                {
+                    _Ni255prev_day = value;
+                }
+                _Ni255prev_day = value;
+                this.OnPropertyChanged(nameof(Ni255Prev_day));
+            }
+        }
+
+
+
+        public static decimal _Ni255realprice;
+        public decimal Ni255Realprice
+        {
+            get { return _Ni255realprice; }
+            set
+            {
+                if (_Ni255realprice != value)
+                {
+                    _Ni255realprice = value;
+                }
+                _Ni255realprice = value;
+                this.OnPropertyChanged(nameof(Ni255Realprice));
+            }
+        }
+
+        public static string _Ni255whichOn;
+        public string Ni255WhichOne
+        {
+            get { return _Ni255whichOn; }
+            set
+            {
+                if (_Ni255whichOn != value)
+                {
+                    _Ni255whichOn = value;
+                }
+                _Ni255whichOn = value;
+                this.OnPropertyChanged(nameof(Ni255WhichOne));
+            }
+        }
+
+      
+
+
         #endregion
 
 
@@ -226,9 +347,10 @@ namespace ListView
         public ListViewPageViewModel()
         {
             IndnButtonClick = new CountUpCommand(Indnswitch);
+            Ni255ButtonClick = new CountUpCommand(Ni255switch);
             //ItemCommand = new CountUpCommand(OnItemCommand);
             ItemList = new ObservableCollection<Price>();
-            ItemStd = new ObservableCollection<Price>();
+            //ItemStd = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
 
             ItemCommand = new Command<string>((key) =>
@@ -254,74 +376,80 @@ namespace ListView
 
         private async void StdStock()
         {
-            int i = 0;
             Price IndnAnser = await Models.Getserchi("^DJI");
             Price Ni255Anser = await Models.Getserchi("998407");
 
 
-            ItemStd.Clear();// 全て削除
+            //users.Add(new User { DisplayName = "Sato Taro" });
 
-            ItemStd.Add(new Price
-            {
-                Name = IndnAnser.Name,
-                Prev_day = IndnAnser.Prev_day,//前日比±**
-                Realprice = IndnAnser.Realprice,//現在値*
-                Percent = IndnAnser.Percent,//前日比％**// "5"
-                ButtonId = i.ToString(),
-                ButtonColor = IndnAnser.Polar
-            });
-            i = i++;
 
-            ItemStd.Add(new Price
-            {
-                Name = Ni255Anser.Name,// "Sony",
-                Itemprice = Ni255Anser.Itemprice,// 2015,
-                Prev_day = Ni255Anser.Prev_day,//前日比±**
-                Realprice = Ni255Anser.Realprice,//現在値*
-                Percent = IndnAnser.Percent,//前日比％**// "5"
-                ButtonId = i.ToString(),
-                ButtonColor = Ni255Anser.Polar
-            });
+            // Name = IndnAnser.Name,
+            Prev_day = IndnAnser.Prev_day;//前日比±**
+            Realprice = IndnAnser.Realprice;//現在値*
+            Percent = IndnAnser.Percent;//前日比％**// "5"
+            WhichOne = IndnAnser.Prev_day;
+            ButtonId = 0;
+            View.IndnButtonColor(IndnAnser.Polar);
+           
+          
+            //Name = Ni255Anser.Name;// "Sony",
+            //Itemprice = Ni255Anser.Itemprice;// 2015,
+            Ni255Prev_day = Ni255Anser.Prev_day;//前日比±**
+            Ni255Realprice = Ni255Anser.Realprice;//現在値*
+            Ni255Percent = Ni255Anser.Percent;//前日比％**// "5"
+            Ni255WhichOne = Ni255Anser.Prev_day;
+            ButtonId = 1;
+            View.Ni255ButtonColor(Ni255Anser.Polar);         
 
         }
 
 
         private void Indnswitch()
         {
-             if (true)
+            if (WhichOne == Percent)
             {
-                ItemStd[0].Percent = ItemStd[0].Prev_day;
+                WhichOne = Prev_day;
             }
             else
             {
-                Percent = ItemStd[0].Percent;
+                WhichOne = Percent;
             }
-
-            //ItemStd.Insert(0, ItemStd[0]);
         }
 
-
-        private async void Ni255Stock()
+        private void Ni255switch()
         {
-            var anser = await Models.Getserchi("998407");
-
-            TokyoStockPrice = anser.Realprice;
-            TokyoStockPercent = anser.Prev_day;
-            //View.Ni255ButtonColor(anser.Polar);
-
-
-            if (anser.Polar == "-")
+            if (Ni255WhichOne == Ni255Percent)
             {
-                //NewYorkStockPercent = anser.Percent;
-                NYorkButtonColor = "Green";
+                Ni255WhichOne = Ni255Prev_day;
             }
-            if (anser.Polar == "+")
+            else
             {
-                //NewYorkStockPercent = Dayratio;
-                NYorkButtonColor = "Red";
+                Ni255WhichOne = Ni255Percent;
             }
-
         }
+
+
+        //private async void Ni255Stock()
+        //{
+        //    var anser = await Models.Getserchi("998407");
+
+        //    TokyoStockPrice = anser.Realprice;
+        //    TokyoStockPercent = anser.Prev_day;
+        //    //View.Ni255ButtonColor(anser.Polar);
+
+
+        //    if (anser.Polar == "-")
+        //    {
+        //        //NewYorkStockPercent = anser.Percent;
+        //        NYorkButtonColor = "Green";
+        //    }
+        //    if (anser.Polar == "+")
+        //    {
+        //        //NewYorkStockPercent = Dayratio;
+        //        NYorkButtonColor = "Red";
+        //    }
+
+        //}
 
         #endregion
 
@@ -341,7 +469,7 @@ namespace ListView
             var index = Convert.ToInt32(key);
 
 
-            ItemStd[index].ButtonColor = "Green";
+            //ItemStd[index].ButtonColor = "Green";
             //ItemList[0].notifyDataSetChanged();
         }
 
@@ -360,7 +488,7 @@ namespace ListView
                 Itemprice = 2015,
                 Realprice = 1000,
                 RealValue = 100,
-                ButtonId = "sample",
+                ButtonId = "Sample",
                 ButtonColor = "Red",
                 Percent = "5"
             });
@@ -378,6 +506,7 @@ namespace ListView
             int i = 0;
             decimal TotalAssetAdd = 0;
             decimal PayAssetpriceAdd = 0;
+            decimal Gain = 0;
 
             // UTF8のファイルの書き込み Edit. 
             string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
@@ -396,18 +525,19 @@ namespace ListView
                 {
                     Name = item.Name,// "Sony",
                     Stocks = item.Stocks,//保有数*
-                    Itemprice = item.Itemprice,// 2015,
+                    Itemprice = item.Itemprice,//
                     Prev_day = item.Prev_day,//前日比±**
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
                     Percent = item.Percent,//前日比％**// "5"
+                    Gain= item.Gain,//損益
                     ButtonId = i.ToString(),
                     ButtonColor = item.Polar
                 });
 
                 PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
                 TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
-
+                //Gain = item.Realprice - item.Itemprice;
                 i = ++i;
             }
             PayAssetprice = PayAssetpriceAdd;
