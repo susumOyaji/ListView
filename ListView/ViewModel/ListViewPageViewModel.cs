@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,7 +15,7 @@ namespace ListView
     /// </summary>
     class ListViewPageViewModel : ViewModelBase //INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// View への参照
@@ -40,7 +41,7 @@ namespace ListView
 
         #region
         public ObservableCollection<Price> ItemList { get; set; }
-       // public ObservableCollection<Price> ItemStd { get; set; }
+        // public ObservableCollection<Price> ItemStd { get; set; }
 
         private static decimal _payAssetprice;
         public decimal PayAssetprice//保有数* 購入価格 = 投資総額
@@ -218,7 +219,7 @@ namespace ListView
 
 
 
-     
+
         public static string _prev_day;
         public string Prev_day
         {
@@ -235,18 +236,18 @@ namespace ListView
         }
 
 
-       
+
         public static decimal _realprice;
         public decimal Realprice
         {
             get { return _realprice; }
             set
             {
-                if (_realprice!= value)
+                if (_realprice != value)
                 {
-                    _realprice= value;
+                    _realprice = value;
                 }
-                _realprice= value;
+                _realprice = value;
                 this.OnPropertyChanged(nameof(Realprice));
             }
         }
@@ -257,11 +258,11 @@ namespace ListView
             get { return _whichOn; }
             set
             {
-                if (_whichOn!= value)
+                if (_whichOn != value)
                 {
-                    _whichOn= value;
+                    _whichOn = value;
                 }
-                _whichOn= value;
+                _whichOn = value;
                 this.OnPropertyChanged(nameof(WhichOne));
             }
         }
@@ -334,7 +335,7 @@ namespace ListView
             }
         }
 
-      
+
 
 
         #endregion
@@ -355,9 +356,9 @@ namespace ListView
 
             ItemCommand = new Command<string>((key) =>
            {
-                // Add the key to the input string.
-                //InputString += key;
-                OnItemCommand(key);
+               // Add the key to the input string.
+               //InputString += key;
+               OnItemCommand(key);
            });
 
 
@@ -390,8 +391,8 @@ namespace ListView
             WhichOne = IndnAnser.Prev_day;
             ButtonId = 0;
             View.IndnButtonColor(IndnAnser.Polar);
-           
-          
+
+
             //Name = Ni255Anser.Name;// "Sony",
             //Itemprice = Ni255Anser.Itemprice;// 2015,
             Ni255Prev_day = Ni255Anser.Prev_day;//前日比±**
@@ -399,7 +400,7 @@ namespace ListView
             Ni255Percent = Ni255Anser.Percent;//前日比％**// "5"
             Ni255WhichOne = Ni255Anser.Prev_day;
             ButtonId = 1;
-            View.Ni255ButtonColor(Ni255Anser.Polar);         
+            View.Ni255ButtonColor(Ni255Anser.Polar);
 
         }
 
@@ -469,11 +470,18 @@ namespace ListView
             var index = Convert.ToInt32(key);
 
 
-            //ItemStd[index].ButtonColor = "Green";
-            //ItemList[0].notifyDataSetChanged();
+
+
+            ItemList[0].Prev_day = ItemList[0].Percent;
+            this.OnPropertyChanged(nameof(Prev_day));
+            //this.NotifyPropertyChange(OnItemCommand);
+            ItemList.Reflesh();
+            ItemList.Update();
+
+            //SettersExtensions(index, ItemList[0].Percent);
         }
 
-
+    
 
         private void Sample()
         {
@@ -506,7 +514,7 @@ namespace ListView
             int i = 0;
             decimal TotalAssetAdd = 0;
             decimal PayAssetpriceAdd = 0;
-            decimal Gain = 0;
+
 
             // UTF8のファイルの書き込み Edit. 
             string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
@@ -530,7 +538,7 @@ namespace ListView
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
                     Percent = item.Percent,//前日比％**// "5"
-                    Gain= item.Gain,//損益
+                    Gain = item.Gain,//損益
                     ButtonId = i.ToString(),
                     ButtonColor = item.Polar
                 });

@@ -8,7 +8,6 @@ namespace ListView
 
     public partial  class Finance
     {
-        int ButtonIdIndex = 0;
         //public static async Task<List<Price>> Parse( )
         public static List<Price> Parse(string responce)
         {

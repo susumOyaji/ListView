@@ -170,7 +170,7 @@
 
 
 
-        <ListView ItemsSource="{Binding ItemList}"  SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false">
+        <ListView x:Name="Listview" ItemsSource="{Binding ItemList}"  SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -216,7 +216,7 @@
                                 <!-- 上段 -->
 
                                 <!-- 下段 -->
-                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Start">
                                     <!-- "銘柄"  "price.Name" -->
                                     <Label x:Name = "City"
                                         Text = "{Binding Name}"
@@ -256,18 +256,22 @@
                                         TextColor = "White"
                                         FontSize="Micro"  
                                         WidthRequest = "50"   
-                                        HorizontalOptions="StartAndExpand"     
+                                        HorizontalOptions="Center"     
                                         HorizontalTextAlignment = "Start"/>
                                    
                                   
-                              </StackLayout>
+                                </StackLayout>
                                 <!-- 下段 -->
                               </StackLayout>
-                                    <Button x:Name="UptoButton"  Text="{Binding Prev_day}"
+                              <StackLayout HorizontalOptions="StartAndExpand">  
+                                    <Button x:Name="UptoButton"
+                                        Text="{Binding Prev_day}"
                                         BackgroundColor="{Binding ButtonColor}"
                                         Command="{Binding BindingContext.ItemCommand, Source={x:Reference page}}"
-                                        CommandParameter="{Binding ButtonId}"/>
-                              </StackLayout>
+                                        CommandParameter="{Binding ButtonId}"
+                                        WidthRequest="60"/>
+                              </StackLayout>  
+                          </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

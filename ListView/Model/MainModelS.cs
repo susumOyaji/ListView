@@ -247,7 +247,7 @@ namespace ListView
                     //Pasonalresponce[index] = price.Name + ","+ Convert.ToString(price.Stocks) + "," + Convert.ToString(price.Itemprice);
                     index = index + 1;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     price.Prev_day = "Close";
                     price.Polar = "Gray";
