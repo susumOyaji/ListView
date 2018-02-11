@@ -147,7 +147,8 @@
         <!-- Button -->
         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
             <Button x:Name="AddButton"
-                Text = "Add"
+                Text = "Refresh"
+                Command="{Binding RefreshCommand}"
                 WidthRequest = "60"
                 HeightRequest = "40"
                 BorderColor = "Gray"/>
@@ -170,105 +171,118 @@
 
 
 
-        <ListView x:Name="Listview" ItemsSource="{Binding ItemList}"  SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false">
+        <ListView x:Name="Listview" SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false"
+                    IsPullToRefreshEnabled="true"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                    ItemsSource="{Binding ItemList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <!-- 列全体 -->
-                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                            <StackLayout  Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                                <!-- 上段 -->
-                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <!-- 項目名 -->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                <!--ボタン除く列全体--> 
+                                <StackLayout Spacing="-5" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                    <!-- 企業コード名 -->
+                                    <StackLayout Spacing="-3" Orientation="Vertical">
                                     <Label  Text = "Name"
                                         TextColor="Red"
                                         FontSize="Micro" 
-                                        WidthRequest = "50"
-                                        HeightRequest="50"       
+                                        WidthRequest = "80"
                                         HorizontalTextAlignment = "Start"
                                         VerticalTextAlignment = "End"/>
-                                    <Label  Text = "Itemprice"
-                                        TextColor="Gray"
-                                        FontSize="Micro" 
-                                        WidthRequest = "50"
-                                        HeightRequest="50"       
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
-                                    <Label  Text = "Realprice"
-                                        TextColor="Gray"
-                                        FontSize="Micro"
-                                        WidthRequest = "50"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
-                                    <Label  Text = "Gain"
-                                        TextColor="Red"
-                                        FontSize="Micro"
-                                        WidthRequest = "50"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
-                                    <Label  Text = "RealValue"
-                                        TextColor="Gray"
-                                        FontSize="Micro"
-                                        WidthRequest = "50"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
-                                </StackLayout>
-                                <!-- 上段 -->
-
-                                <!-- 下段 -->
-                                <StackLayout Padding="0, 0, 0, 0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Start">
-                                    <!-- "銘柄"  "price.Name" -->
                                     <Label x:Name = "City"
                                         Text = "{Binding Name}"
                                         TextColor="Olive"
                                         FontSize="Default"   
-                                        WidthRequest = "50"
-                                        HorizontalTextAlignment = "Start"/>
-                                   
-                                    
-
+                                        WidthRequest = "80"
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "Start"/> 
+                                    </StackLayout>
+                                    <!--取得金額 -->
+                                    <StackLayout Spacing="-3" Orientation="Vertical">
+                                    <Label  Text = "Itemprice"
+                                        TextColor="Gray"
+                                        FontSize="Micro" 
+                                        WidthRequest = "80"
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "End"/>
                                     <Label x:Name= "Itemprice"
                                         Text = "{Binding Itemprice}"
                                         TextColor = "White"
-                                        WidthRequest = "50"   
-                                        HorizontalOptions="StartAndExpand" 
-                                        HorizontalTextAlignment = "Start"/>
-
-
+                                        FontSize="Default"     
+                                        WidthRequest = "80"   
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "Start"/>
+                                    </StackLayout>
+                                    <!-- Carentprice 現在値 -->
+                                    <StackLayout Spacing="-3" Orientation="Vertical">
+                                    <Label  Text = "Realprice"
+                                        TextColor="Gray"
+                                        FontSize="Micro"
+                                        WidthRequest = "80"
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "End"/>
                                     <Label x:Name= "Realprice"
                                         Text = "{Binding Realprice}"
                                         TextColor = "White"
                                         FontSize="Default"     
-                                        WidthRequest = "50"   
-                                        HorizontalOptions="StartAndExpand"    
-                                        HorizontalTextAlignment = "Start"/>
+                                        WidthRequest = "80"   
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "Start"/>
+                                    </StackLayout>
+                                    
                                     <!-- 損益 -->
+                                    <StackLayout Spacing="-5" Orientation="Vertical">
+                                    <Label  Text = "Gain"
+                                        TextColor="Red"
+                                        FontSize="Micro"
+                                        WidthRequest = "150"
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "End"/>
                                     <Label x:Name= "Gain"
                                         Text = "{Binding Path= Gain, StringFormat='{0:N1}'}"
                                         TextColor = "White"
-                                        WidthRequest = "50"
-                                        FontSize="Micro"   
-                                        HorizontalOptions="StartAndExpand"   
-                                        HorizontalTextAlignment = "Start"/>
-
+                                        WidthRequest = "150"
+                                        FontSize="Default"   
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "Start"/>
+                                    </StackLayout>
+                                    <!--  -->
+                                    <StackLayout Spacing="-5" Orientation="Vertical">
+                                    <Label  Text = "RealValue"
+                                        TextColor="Gray"
+                                        FontSize="Micro"
+                                        WidthRequest = "150"
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "End"/>
                                     <Label x:Name= "MarketCapitalization"
-                                        Text = "{Binding RealValue}"
+                                        Text = "{Binding RealValue, StringFormat='{0:N1}'}"
                                         TextColor = "White"
-                                        FontSize="Micro"  
-                                        WidthRequest = "50"   
-                                        HorizontalOptions="Center"     
-                                        HorizontalTextAlignment = "Start"/>
-                                   
-                                  
+                                        FontSize="Default"  
+                                        WidthRequest = "150"   
+                                        HorizontalTextAlignment = "Start"
+                                        VerticalTextAlignment = "Start"/>
+                                    </StackLayout>
                                 </StackLayout>
+                                <!-- 上段 -->
                                 <!-- 下段 -->
-                              </StackLayout>
-                              <StackLayout HorizontalOptions="StartAndExpand">  
-                                    <Button x:Name="UptoButton"
+                                <!-- "銘柄"  "price.Name" -->
+                                <!-- 下段 -->
+                              <!-- Chengprice -->
+                              <StackLayout Spacing="-5" Orientation="Vertical" VerticalOptions="StartAndExpand">  
+                                <Label x:Name="Chenge"
+                                        Text="Chege"
+                                        TextColor="Gray"
+                                        FontSize="Micro"
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "End"/>
+                                <Button x:Name="UptoButton"
                                         Text="{Binding Prev_day}"
                                         BackgroundColor="{Binding ButtonColor}"
-                                        Command="{Binding BindingContext.ItemCommand, Source={x:Reference page}}"
+                                        Command="{Binding BindingContext.RefreshCommand, Source={x:Reference page}}"
                                         CommandParameter="{Binding ButtonId}"
+                                        HeightRequest="35"
                                         WidthRequest="60"/>
                               </StackLayout>  
                           </StackLayout>

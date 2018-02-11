@@ -38,6 +38,10 @@ namespace ListView
             }
         }
 
+        public void Sw()
+        {
+            //UptoButton.Text = "";
+        }
 
     }
 }

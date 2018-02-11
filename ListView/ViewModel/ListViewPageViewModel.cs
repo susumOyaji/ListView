@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -39,33 +40,12 @@ namespace ListView
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
 
-        #region
+
         public ObservableCollection<Price> ItemList { get; set; }
         // public ObservableCollection<Price> ItemStd { get; set; }
 
-        private static decimal _payAssetprice;
-        public decimal PayAssetprice//保有数* 購入価格 = 投資総額
-        {
-            get { return _payAssetprice; }
-            set
-            {
-                _payAssetprice = value;
-                this.OnPropertyChanged(nameof(PayAssetprice));
-            }
-        }
 
-        public static decimal _totalAsset;
-        public decimal TotalAsset //現在評価額合計
-        {
-            get { return _totalAsset; }
-            set
-            {
-                _totalAsset = value;
-                this.OnPropertyChanged(nameof(TotalAsset));
-            }
-
-        }
-
+        #region  OnPropertyChanged
         //private static decimal _currentStockPrice;
         //public decimal NewYorkStockPrice
         //{
@@ -112,17 +92,31 @@ namespace ListView
         //    }
         //}
 
-        private static string _polar;
-        public string Polar//(-)下落
-        {
-            get { return _polar; }
-            set
-            {
-                _polar = value;
-                // StockMvvmView.ChangeButtonColor(_polar);
-                this.OnPropertyChanged(nameof(Polar));
-            }
-        }
+        //private static string _buttonColor;
+        //public string ButtonColor
+        //{
+        //    get { return _buttonColor; }
+        //    set
+        //    {
+        //        _buttonColor = value;
+        //        this.OnPropertyChanged(nameof(ButtonColor));
+        //    }
+        //}
+
+
+
+        //private static string _gainColor;
+        //public string GainColor
+        //{
+        //    get { return _gainColor; }
+        //    set
+        //    {
+        //        _gainColor = value;
+        //        this.OnPropertyChanged(nameof(GainColor));
+        //    }
+        //}
+
+
 
 
         //private static string _currentColor;
@@ -135,6 +129,44 @@ namespace ListView
         //        this.OnPropertyChanged(nameof(NYorkButtonColor));
         //    }
         //}
+
+        #endregion
+
+        #region  PropertyChanged
+        private static decimal _payAssetprice;
+        public decimal PayAssetprice//保有数* 購入価格 = 投資総額
+        {
+            get { return _payAssetprice; }
+            set
+            {
+                _payAssetprice = value;
+                this.OnPropertyChanged(nameof(PayAssetprice));
+            }
+        }
+
+        public static decimal _totalAsset;
+        public decimal TotalAsset //現在評価額合計
+        {
+            get { return _totalAsset; }
+            set
+            {
+                _totalAsset = value;
+                this.OnPropertyChanged(nameof(TotalAsset));
+            }
+
+        }
+
+        private static string _polar;
+        public string Polar//(-)下落
+        {
+            get { return _polar; }
+            set
+            {
+                _polar = value;
+                // StockMvvmView.ChangeButtonColor(_polar);
+                this.OnPropertyChanged(nameof(Polar));
+            }
+        }
 
 
         private static decimal _uptoAsset;
@@ -159,30 +191,6 @@ namespace ListView
                 this.OnPropertyChanged(nameof(ButtonId));
             }
         }
-
-        //private static string _buttonColor;
-        //public string ButtonColor
-        //{
-        //    get { return _buttonColor; }
-        //    set
-        //    {
-        //        _buttonColor = value;
-        //        this.OnPropertyChanged(nameof(ButtonColor));
-        //    }
-        //}
-
-
-
-        //private static string _gainColor;
-        //public string GainColor
-        //{
-        //    get { return _gainColor; }
-        //    set
-        //    {
-        //        _gainColor = value;
-        //        this.OnPropertyChanged(nameof(GainColor));
-        //    }
-        //}
 
 
         private static string inputString = "";
@@ -216,8 +224,6 @@ namespace ListView
                 this.OnPropertyChanged(nameof(Percent));
             }
         }
-
-
 
 
         public static string _prev_day;
@@ -335,6 +341,22 @@ namespace ListView
             }
         }
 
+        // ListView.IsRefreshingと同期させるプロパティ
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                if (value == isRefreshing)
+                    return;
+                isRefreshing = value;
+                this.OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+        // LiseViewのButtonにバインディングするCommand
+        // ListViewを引っ張った時に実行させるコマンド
+        public ICommand RefreshCommand { get; private set; }
 
 
 
@@ -349,29 +371,87 @@ namespace ListView
         {
             IndnButtonClick = new CountUpCommand(Indnswitch);
             Ni255ButtonClick = new CountUpCommand(Ni255switch);
-            //ItemCommand = new CountUpCommand(OnItemCommand);
+           
             ItemList = new ObservableCollection<Price>();
-            //ItemStd = new ObservableCollection<Price>();
+        
             RefCommand = new CountUpCommand(IncrementData);
 
+            RefreshCommand = new Command<string>((key) =>
+            {
+                Refresh(key);
+            });
+           
             ItemCommand = new Command<string>((key) =>
-           {
+            {
                // Add the key to the input string.
                //InputString += key;
                OnItemCommand(key);
-           });
-
-
+            });
+                     
             StdStock();
             // Ni255Stock();
-
             //Sample();
             DispSet(false);
+
         }
 
-
-
         #region メソッド
+
+
+
+
+
+        private void Refresh(string key)
+        {
+            View.DisplayAlert("XSample", "SelectItem-" + key, "OK");
+
+            var index = Convert.ToInt32(key);
+
+
+            //SettersExtensions(index, ItemList[0].Percent);
+           
+
+
+            IsRefreshing = true;
+
+            Prev_day = ItemList[index].Percent;
+         
+
+
+            If(ItemLis.SelectedItems.Count > 0 )
+            {
+            var lvi  ItemList = ItemList.SelectedItems(0)
+            lvi.Text = TextBox1.Text
+            lvi.SubItems(1).Text = TextBox2.Text
+            lvi.SubItems(2).Text = TextBox3.Text
+            }
+
+
+
+
+                    
+            //ItemList[index] = (new Price
+            //{
+            //        Name = ItemList[index].Name,// "Sony",
+            //        Stocks = ItemList[index].Stocks,//保有数*
+            //        Itemprice = ItemList[index].Itemprice,//
+            //        Prev_day = ItemList[index].Prev_day,//前日比±**
+            //        Realprice = ItemList[index].Realprice,//現在値*// 1000,
+            //        RealValue = ItemList[index].RealValue,// 100,
+            //        Percent = ItemList[index].Percent,//前日比％**// "5"
+            //        Gain = ItemList[index].Gain,//損益
+            //        ButtonId = index.ToString(),
+            //        ButtonColor = ItemList[index].Polar
+
+            //});
+
+            // Binding機構経由でListViewのIsRefreshingプロパティも変更する
+            IsRefreshing = false;
+
+            // ICommand.CanExecuteにもバインドしたプロパティを利用できる
+            //(nothing) => !IsRefreshing
+         
+        }
 
 
 
@@ -469,14 +549,6 @@ namespace ListView
 
             var index = Convert.ToInt32(key);
 
-
-
-
-            ItemList[0].Prev_day = ItemList[0].Percent;
-            this.OnPropertyChanged(nameof(Prev_day));
-            //this.NotifyPropertyChange(OnItemCommand);
-            ItemList.Reflesh();
-            ItemList.Update();
 
             //SettersExtensions(index, ItemList[0].Percent);
         }
