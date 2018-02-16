@@ -56,6 +56,21 @@ namespace ListView
         public string  ButtonId { get; set; }
         public string ButtonColor { get; set; }
         public decimal Gain { get; set; }//損益
+        public string Bmi { get; set; }//button表示
+
+
+
+        public void PriceSwith()
+        {
+            if (Bmi == Percent)
+            {
+                Bmi = Prev_day;
+            }
+            else
+            {
+                Bmi = Percent;
+            }
+        }
 
     }
 

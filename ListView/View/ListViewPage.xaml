@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListView;assembly=ListView"
              xmlns:vm="ListView.ListViewPage"
              x:Class="ListView.ListViewPage"
              x:Name="page">
@@ -8,10 +9,9 @@
         <vm:ListViewPageViewModel View="{x:Reference page}"/>
     </ContentPage.BindingContext>
 
-  
-  
 
-    
+
+
     <StackLayout BackgroundColor="Black" >
         <StackLayout Orientation="Vertical" Spacing="-8">
             <StackLayout x:Name="Toplist"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >     
@@ -172,9 +172,6 @@
 
 
         <ListView x:Name="Listview" SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false"
-                    IsPullToRefreshEnabled="true"
-                    RefreshCommand="{Binding RefreshCommand}"
-                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                     ItemsSource="{Binding ItemList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -189,14 +186,14 @@
                                         TextColor="Red"
                                         FontSize="Micro" 
                                         WidthRequest = "80"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "Start"/>
                                     <Label x:Name = "City"
                                         Text = "{Binding Name}"
                                         TextColor="Olive"
                                         FontSize="Default"   
                                         WidthRequest = "80"
-                                        HorizontalTextAlignment = "Start"
+                                        HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/> 
                                     </StackLayout>
                                     <!--取得金額 -->
@@ -205,14 +202,14 @@
                                         TextColor="Gray"
                                         FontSize="Micro" 
                                         WidthRequest = "80"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Itemprice"
                                         Text = "{Binding Itemprice}"
                                         TextColor = "White"
                                         FontSize="Default"     
                                         WidthRequest = "80"   
-                                        HorizontalTextAlignment = "Start"
+                                        HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     </StackLayout>
                                     <!-- Carentprice 現在値 -->
@@ -221,14 +218,14 @@
                                         TextColor="Gray"
                                         FontSize="Micro"
                                         WidthRequest = "80"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Realprice"
                                         Text = "{Binding Realprice}"
                                         TextColor = "White"
                                         FontSize="Default"     
                                         WidthRequest = "80"   
-                                        HorizontalTextAlignment = "Start"
+                                        HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     </StackLayout>
                                     
@@ -239,13 +236,13 @@
                                         FontSize="Micro"
                                         WidthRequest = "150"
                                         HorizontalTextAlignment = "Center"
-                                        VerticalTextAlignment = "End"/>
+                                        VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Gain"
                                         Text = "{Binding Path= Gain, StringFormat='{0:N1}'}"
                                         TextColor = "White"
                                         WidthRequest = "150"
                                         FontSize="Default"   
-                                        HorizontalTextAlignment = "Start"
+                                        HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     </StackLayout>
                                     <!--  -->
@@ -254,14 +251,14 @@
                                         TextColor="Gray"
                                         FontSize="Micro"
                                         WidthRequest = "150"
-                                        HorizontalTextAlignment = "Start"
-                                        VerticalTextAlignment = "End"/>
+                                        HorizontalTextAlignment = "Center"
+                                        VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "MarketCapitalization"
                                         Text = "{Binding RealValue, StringFormat='{0:N1}'}"
                                         TextColor = "White"
                                         FontSize="Default"  
                                         WidthRequest = "150"   
-                                        HorizontalTextAlignment = "Start"
+                                        HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     </StackLayout>
                                 </StackLayout>
@@ -277,13 +274,24 @@
                                         FontSize="Micro"
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "End"/>
+                                  <!--
                                 <Button x:Name="UptoButton"
-                                        Text="{Binding Prev_day}"
+                                        Text="Binding Bmi}"
+                                        FontSize="Micro"
                                         BackgroundColor="{Binding ButtonColor}"
                                         Command="{Binding BindingContext.RefreshCommand, Source={x:Reference page}}"
                                         CommandParameter="{Binding ButtonId}"
                                         HeightRequest="35"
                                         WidthRequest="60"/>
+                                  -->
+                                <Button x:Name="Event" Text="{Binding Bmi}" BackgroundColor="{Binding ButtonColor}">
+                                    <Button.Triggers>
+                                        <EventTrigger Event="Clicked">
+                                           <!-- <local:ButtonClickedTriggerAction/> -->
+                                            <Setter Property="TextColor" Value="Aqua" />
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
                               </StackLayout>  
                           </StackLayout>
                     </ViewCell>

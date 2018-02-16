@@ -234,6 +234,7 @@ namespace ListView
 
                     price.Realprice = Convert.ToDecimal(Value);//現在値
                     price.Prev_day = YenRatio;//前日比±
+                    price.Bmi = YenRatio;
                     price.Percent = PercentRatio; //前日比％
                     price.PayAssetprice = price.Stocks * price.Itemprice;//株数*購入単価
                     price.Gain = (price.Realprice - price.Itemprice)*price.Stocks;//損益

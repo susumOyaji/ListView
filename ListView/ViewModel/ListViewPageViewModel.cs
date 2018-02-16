@@ -39,7 +39,9 @@ namespace ListView
         public ICommand Ni255ButtonClick { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
-
+        // LiseViewのButtonにバインディングするCommand
+        // ListViewを引っ張った時に実行させるコマンド
+        public ICommand RefreshCommand { get; private set; }
 
         public ObservableCollection<Price> ItemList { get; set; }
         // public ObservableCollection<Price> ItemStd { get; set; }
@@ -341,22 +343,38 @@ namespace ListView
             }
         }
 
+        //public static string[] _pwhichOn;
+        //public string[] PWhichOne
+        //{
+        //    get { return _pwhichOn; }
+        //    set
+        //    {
+        //        if (_pwhichOn != value)
+        //        {
+        //            _pwhichOn = value;
+        //        }
+        //        _pwhichOn = value;
+        //        this.OnPropertyChanged(nameof(PWhichOne));
+        //    }
+        //}
+
+
+
+
         // ListView.IsRefreshingと同期させるプロパティ
-        private bool isRefreshing;
-        public bool IsRefreshing
-        {
-            get { return isRefreshing; }
-            set
-            {
-                if (value == isRefreshing)
-                    return;
-                isRefreshing = value;
-                this.OnPropertyChanged(nameof(IsRefreshing));
-            }
-        }
-        // LiseViewのButtonにバインディングするCommand
-        // ListViewを引っ張った時に実行させるコマンド
-        public ICommand RefreshCommand { get; private set; }
+        //private bool isRefreshing;
+        //public bool IsRefreshing
+        //{
+        //    get { return isRefreshing; }
+        //    set
+        //    {
+        //        if (value == isRefreshing)
+        //            return;
+        //        isRefreshing = value;
+        //        this.OnPropertyChanged(nameof(IsRefreshing));
+        //    }
+        //}
+
 
 
 
@@ -401,57 +419,36 @@ namespace ListView
 
 
 
-        private void Refresh(string key)
+        private async void Refresh(string key)
         {
-            View.DisplayAlert("XSample", "SelectItem-" + key, "OK");
+            await View.DisplayAlert("XSample", "SelectItem-" + key, "OK");
 
             var index = Convert.ToInt32(key);
 
+          
 
-            //SettersExtensions(index, ItemList[0].Percent);
-           
+            List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
+            pricesanser[index].PriceSwith();
+            //ItemList[index].PriceSwith();
 
-
-            IsRefreshing = true;
-
-            Prev_day = ItemList[index].Percent;
-         
-
-
-            If(ItemLis.SelectedItems.Count > 0 )
+            ItemList[index] = (new Price
             {
-            var lvi  ItemList = ItemList.SelectedItems(0)
-            lvi.Text = TextBox1.Text
-            lvi.SubItems(1).Text = TextBox2.Text
-            lvi.SubItems(2).Text = TextBox3.Text
-            }
+                Name = pricesanser[index].Name,// "Sony",
+                Stocks = pricesanser[index].Stocks,//保有数*
+                Itemprice = pricesanser[index].Itemprice,//
+                Prev_day = pricesanser[index].Percent,//前日比％**
+                Realprice = pricesanser[index].Realprice,//現在値*// 1000,
+                RealValue = pricesanser[index].RealValue,// 100,
+                Percent = pricesanser[index].Percent,//前日比％**// "5"
+                Gain = pricesanser[index].Gain,//損益
+                ButtonId = index.ToString(),
+                ButtonColor = pricesanser[index].Polar,
+                Bmi = pricesanser[index].Bmi
+            });
 
 
-
-
-                    
-            //ItemList[index] = (new Price
-            //{
-            //        Name = ItemList[index].Name,// "Sony",
-            //        Stocks = ItemList[index].Stocks,//保有数*
-            //        Itemprice = ItemList[index].Itemprice,//
-            //        Prev_day = ItemList[index].Prev_day,//前日比±**
-            //        Realprice = ItemList[index].Realprice,//現在値*// 1000,
-            //        RealValue = ItemList[index].RealValue,// 100,
-            //        Percent = ItemList[index].Percent,//前日比％**// "5"
-            //        Gain = ItemList[index].Gain,//損益
-            //        ButtonId = index.ToString(),
-            //        ButtonColor = ItemList[index].Polar
-
-            //});
-
-            // Binding機構経由でListViewのIsRefreshingプロパティも変更する
-            IsRefreshing = false;
-
-            // ICommand.CanExecuteにもバインドしたプロパティを利用できる
-            //(nothing) => !IsRefreshing
-         
         }
+
 
 
 
@@ -592,6 +589,7 @@ namespace ListView
             string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
                                                                                                              // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
+            
 
             if (Refresh == true)
             {
@@ -600,6 +598,21 @@ namespace ListView
 
             foreach (Price item in pricesanser)
             {
+                //item.PriceSwith();
+
+
+                //ItemList.Add(new Price { Name = item.Name });
+                //ItemList.Add(new Price { Stocks = item.Stocks });
+                //ItemList.Add(new Price { Itemprice = item.Itemprice });
+                //ItemList.Add(new Price { Prev_day = item.Prev_day });
+                //ItemList.Add(new Price { Realprice = item.Realprice });
+                //ItemList.Add(new Price { RealValue = item.RealValue });
+                //ItemList.Add(new Price { Percent = item.Percent });
+                //ItemList.Add(new Price { Gain = item.Gain });
+                //ItemList.Add(new Price { ButtonId = i.ToString() });
+                //ItemList.Add(new Price { ButtonColor = item.Polar });
+                //ItemList.Add(new Price { Bmi = item.Bmi });
+
 
                 ItemList.Add(new Price
                 {
@@ -609,11 +622,14 @@ namespace ListView
                     Prev_day = item.Prev_day,//前日比±**
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
-                    Percent = item.Percent,//前日比％**// "5"
+                    //Percent = item.Percent,//前日比％**// "5"
                     Gain = item.Gain,//損益
                     ButtonId = i.ToString(),
-                    ButtonColor = item.Polar
+                    ButtonColor = item.Polar,
+                    Bmi = item.Bmi,
+
                 });
+
 
                 PayAssetpriceAdd = PayAssetpriceAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Itemprice));//株数*購入単価の合計
                 TotalAssetAdd = TotalAssetAdd + (pricesanser[i].Stocks * Convert.ToDecimal(pricesanser[i].Realprice));//現在評価額
@@ -676,10 +692,27 @@ namespace ListView
             // Ni255Stock();
             DispSet(true);
         }
-
-
-
-
-
+        
     }
+
+    public class ButtonClickedTriggerAction : TriggerAction<Button>
+    { // <- 1
+        protected override void Invoke(Button sender)
+        { // <- 2
+            int n;
+            if (!Int32.TryParse(sender.Text, out n))
+            { // <- 3
+                sender.TextColor = Color.Red;
+                sender.Text = "Push";
+                
+            }
+            else
+            {
+                sender.TextColor = Color.Yellow;
+            }
+        }
+    }
+
+
+
 }
