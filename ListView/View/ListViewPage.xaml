@@ -82,6 +82,9 @@
                     HorizontalTextAlignment = "Center"
                     VerticalTextAlignment = "Start"/>
 
+
+                
+
                 <Label x:Name="TitleTotal"
                     Text = "投資総額"
                     TextColor = "White"
@@ -274,26 +277,18 @@
                                         FontSize="Micro"
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "End"/>
-                                  <!--
-                                <Button x:Name="UptoButton"
-                                        Text="Binding Bmi}"
-                                        FontSize="Micro"
-                                        BackgroundColor="{Binding ButtonColor}"
-                                        Command="{Binding BindingContext.RefreshCommand, Source={x:Reference page}}"
-                                        CommandParameter="{Binding ButtonId}"
-                                        HeightRequest="35"
-                                        WidthRequest="60"/>
-                                  -->
-                                <Button x:Name="Event" Text="{Binding Bmi}" BackgroundColor="{Binding ButtonColor}">
-                                    <Button.Triggers>
+                                <Button x:Name="Event" Text="{Binding Prev_day}" BackgroundColor="{Binding ButtonColor}"
+                                        CommandParameter="{Binding FirstLastName}"
+                                        HeightRequest="40"
+                                        WidthRequest="70">
+                                    <Button.Triggers>    
                                         <EventTrigger Event="Clicked">
-                                           <!-- <local:ButtonClickedTriggerAction/> -->
-                                            <Setter Property="TextColor" Value="Aqua" />
+                                           <local:ButtonClickedTriggerAction/>
                                         </EventTrigger>
                                     </Button.Triggers>
                                 </Button>
                               </StackLayout>  
-                          </StackLayout>
+                       </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

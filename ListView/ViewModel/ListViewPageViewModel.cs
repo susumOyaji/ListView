@@ -428,7 +428,7 @@ namespace ListView
           
 
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
-            pricesanser[index].PriceSwith();
+            //pricesanser[index].PriceSwith();
             //ItemList[index].PriceSwith();
 
             ItemList[index] = (new Price
@@ -443,7 +443,7 @@ namespace ListView
                 Gain = pricesanser[index].Gain,//損益
                 ButtonId = index.ToString(),
                 ButtonColor = pricesanser[index].Polar,
-                Bmi = pricesanser[index].Bmi
+               
             });
 
 
@@ -598,22 +598,6 @@ namespace ListView
 
             foreach (Price item in pricesanser)
             {
-                //item.PriceSwith();
-
-
-                //ItemList.Add(new Price { Name = item.Name });
-                //ItemList.Add(new Price { Stocks = item.Stocks });
-                //ItemList.Add(new Price { Itemprice = item.Itemprice });
-                //ItemList.Add(new Price { Prev_day = item.Prev_day });
-                //ItemList.Add(new Price { Realprice = item.Realprice });
-                //ItemList.Add(new Price { RealValue = item.RealValue });
-                //ItemList.Add(new Price { Percent = item.Percent });
-                //ItemList.Add(new Price { Gain = item.Gain });
-                //ItemList.Add(new Price { ButtonId = i.ToString() });
-                //ItemList.Add(new Price { ButtonColor = item.Polar });
-                //ItemList.Add(new Price { Bmi = item.Bmi });
-
-
                 ItemList.Add(new Price
                 {
                     Name = item.Name,// "Sony",
@@ -622,12 +606,11 @@ namespace ListView
                     Prev_day = item.Prev_day,//前日比±**
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
-                    //Percent = item.Percent,//前日比％**// "5"
+                    Percent = item.Percent,//前日比％**// "5"
                     Gain = item.Gain,//損益
                     ButtonId = i.ToString(),
                     ButtonColor = item.Polar,
-                    Bmi = item.Bmi,
-
+                    //FirstLastName = item.FirstLastName
                 });
 
 
@@ -696,19 +679,23 @@ namespace ListView
     }
 
     public class ButtonClickedTriggerAction : TriggerAction<Button>
-    { // <- 1
+    { 
         protected override void Invoke(Button sender)
-        { // <- 2
-            int n;
-            if (!Int32.TryParse(sender.Text, out n))
-            { // <- 3
-                sender.TextColor = Color.Red;
-                sender.Text = "Push";
-                
+        { 
+            var SourceWord = (string)sender.CommandParameter;
+            int index = SourceWord.LastIndexOf(",");
+            var PercentWord = SourceWord.Substring(index + 1, (SourceWord.Length - index) - 1);
+
+            index = SourceWord.LastIndexOf(",");
+            var Prev_dayWord = SourceWord.Substring(index - index,index);
+
+            if (sender.Text == Prev_dayWord)
+            {
+                sender.Text = PercentWord;
             }
             else
-            {
-                sender.TextColor = Color.Yellow;
+            { 
+                sender.Text = Prev_dayWord;
             }
         }
     }
