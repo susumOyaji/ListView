@@ -35,8 +35,8 @@ namespace ListView
         /// <summary>
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
-        public ICommand IndnButtonClick { protected set; get; }
-        public ICommand Ni255ButtonClick { protected set; get; }
+        //public ICommand IndnButtonClick { protected set; get; }
+        //public ICommand Ni255ButtonClick { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
         // LiseViewのButtonにバインディングするCommand
@@ -94,16 +94,16 @@ namespace ListView
         //    }
         //}
 
-        //private static string _buttonColor;
-        //public string ButtonColor
-        //{
-        //    get { return _buttonColor; }
-        //    set
-        //    {
-        //        _buttonColor = value;
-        //        this.OnPropertyChanged(nameof(ButtonColor));
-        //    }
-        //}
+        private static string _buttonColor;
+        public string ButtonColor
+        {
+            get { return _buttonColor; }
+            set
+            {
+                _buttonColor = value;
+                this.OnPropertyChanged(nameof(ButtonColor));
+            }
+        }
 
 
 
@@ -343,6 +343,37 @@ namespace ListView
             }
         }
 
+      
+        public static string _firstLastName;
+        public string FirstLastName
+        {
+            get { return _firstLastName; }
+            set
+            {
+                if (_firstLastName != value)
+                {
+                    _firstLastName = value;
+                }
+                _firstLastName = value;
+                this.OnPropertyChanged(nameof(FirstLastName));
+            }
+        }
+
+       
+        public static string _Ni255firstLastName;
+        public string Ni255FirstLastName
+        {
+            get { return _Ni255firstLastName; }
+            set
+            {
+                if (_Ni255firstLastName != value)
+                {
+                    _Ni255firstLastName = value;
+                }
+                _Ni255firstLastName = value;
+                this.OnPropertyChanged(nameof(Ni255FirstLastName));
+            }
+        }
         //public static string[] _pwhichOn;
         //public string[] PWhichOne
         //{
@@ -387,8 +418,8 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            IndnButtonClick = new CountUpCommand(Indnswitch);
-            Ni255ButtonClick = new CountUpCommand(Ni255switch);
+            //IndnButtonClick = new CountUpCommand(Indnswitch);
+            //Ni255ButtonClick = new CountUpCommand(Ni255switch);
            
             ItemList = new ObservableCollection<Price>();
         
@@ -396,7 +427,7 @@ namespace ListView
 
             RefreshCommand = new Command<string>((key) =>
             {
-                Refresh(key);
+               Refresh(key);
             });
            
             ItemCommand = new Command<string>((key) =>
@@ -456,16 +487,14 @@ namespace ListView
         {
             Price IndnAnser = await Models.Getserchi("^DJI");
             Price Ni255Anser = await Models.Getserchi("998407");
-
-
-            //users.Add(new User { DisplayName = "Sato Taro" });
-
+                      
 
             // Name = IndnAnser.Name,
             Prev_day = IndnAnser.Prev_day;//前日比±**
             Realprice = IndnAnser.Realprice;//現在値*
             Percent = IndnAnser.Percent;//前日比％**// "5"
-            WhichOne = IndnAnser.Prev_day;
+            FirstLastName = IndnAnser.FirstLastName;
+            Polar = IndnAnser.Polar;
             ButtonId = 0;
             View.IndnButtonColor(IndnAnser.Polar);
 
@@ -475,36 +504,37 @@ namespace ListView
             Ni255Prev_day = Ni255Anser.Prev_day;//前日比±**
             Ni255Realprice = Ni255Anser.Realprice;//現在値*
             Ni255Percent = Ni255Anser.Percent;//前日比％**// "5"
-            Ni255WhichOne = Ni255Anser.Prev_day;
+            Ni255FirstLastName = Ni255Anser.FirstLastName;
+           
             ButtonId = 1;
             View.Ni255ButtonColor(Ni255Anser.Polar);
 
         }
 
 
-        private void Indnswitch()
-        {
-            if (WhichOne == Percent)
-            {
-                WhichOne = Prev_day;
-            }
-            else
-            {
-                WhichOne = Percent;
-            }
-        }
+        //private void Indnswitch()
+        //{
+        //    if (WhichOne == Percent)
+        //    {
+        //        WhichOne = Prev_day;
+        //    }
+        //    else
+        //    {
+        //        WhichOne = Percent;
+        //    }
+        //}
 
-        private void Ni255switch()
-        {
-            if (Ni255WhichOne == Ni255Percent)
-            {
-                Ni255WhichOne = Ni255Prev_day;
-            }
-            else
-            {
-                Ni255WhichOne = Ni255Percent;
-            }
-        }
+        //private void Ni255switch()
+        //{
+        //    if (Ni255WhichOne == Ni255Percent)
+        //    {
+        //        Ni255WhichOne = Ni255Prev_day;
+        //    }
+        //    else
+        //    {
+        //        Ni255WhichOne = Ni255Percent;
+        //    }
+        //}
 
 
         //private async void Ni255Stock()

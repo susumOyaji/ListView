@@ -47,7 +47,7 @@ namespace ListView
         public string Polar { get; set; }//上げ下げ(+ or -)
         public decimal PayAssetprice { get; set; }//保有数* 購入価格 = 投資総額
         public decimal RealValue { get; set; }//利益総額
-        public decimal Ask { get; set; }//買値
+        //public decimal Ask { get; set; }//買値
         public decimal Bid { get; set; }//売値/取引値
         public decimal Investmen { get; set; }//投資額
         public decimal Investmens { get; set; }//投資総額

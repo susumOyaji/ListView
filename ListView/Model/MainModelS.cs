@@ -144,11 +144,11 @@ namespace ListView
                              
           
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 cityprice.Percent = "Close"; //前日比％
                 cityprice.Polar = "Gray";
-                MessagingCenter.Send(e.Message, "市場が開始していません。", true);
+
             }
             return cityprice;// polarity;
         }

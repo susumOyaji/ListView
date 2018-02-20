@@ -30,11 +30,20 @@
                     HorizontalTextAlignment = "End"
                     VerticalTextAlignment = "Center"/>
                 <Button x:Name="IndnButton"
-                    Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}"
-                    Text = "{Binding WhichOne}"
+                    Text = "{Binding Prev_day}"
                     TextColor = "Black"
-                    FontSize="10"
-                    BackgroundColor="Gray"/>
+                    FontSize="13"
+                    BackgroundColor="Gray"
+                    CommandParameter="{Binding FirstLastName}"
+                    HeightRequest="40"
+                    WidthRequest="70">
+                    <!-- Command="{Binding BindingContext.IndnButtonClick, Source={x:Reference page}}" -->
+                    <Button.Triggers>    
+                       <EventTrigger Event="Clicked">
+                          <local:ButtonClickedTriggerAction/>
+                       </EventTrigger>
+                    </Button.Triggers>
+                </Button>
             </StackLayout>
 
             <StackLayout x:Name="Ni255list"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >     
@@ -53,11 +62,23 @@
                     HorizontalTextAlignment = "End"
                     VerticalTextAlignment = "Center"/>
                 <Button x:Name="Ni255Button"
-                    Command="{Binding BindingContext.Ni255ButtonClick, Source={x:Reference page}}"
-                    Text = "{Binding Ni255WhichOne}"
+                    
+                    Text = "{Binding Ni255Prev_day}"
                     TextColor = "Black"
-                    FontSize="10"
-                    BackgroundColor="Gray"/>
+                    FontSize="13"
+                    BackgroundColor="Gray"
+                    CommandParameter="{Binding Ni255FirstLastName}"
+                    HeightRequest="40"
+                    WidthRequest="70">
+
+                    <!-- Command="{Binding BindingContext.Ni255ButtonClick, Source={x:Reference page}}" -->
+                    <Button.Triggers>    
+                       <EventTrigger Event="Clicked">
+                          <local:ButtonClickedTriggerAction/>
+                       </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                
             </StackLayout>
         </StackLayout>
 
@@ -71,75 +92,79 @@
 
 
 
-        <StackLayout Orientation="Vertical"  VerticalOptions="Center" Spacing = "-5" >
+        <StackLayout BackgroundColor="Olive" Orientation="Horizontal"  HorizontalOptions="Center" VerticalOptions="Center" Spacing = "-5" >
+            <!--ボタン除く列全体--> 
             <StackLayout x:Name="AssetNameLayout"  Padding="0,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                <Label x:Name="TitleAsset"
-                    Text = "資産状況"
-                    TextColor = "White"
-                    BackgroundColor="Black"
-                    FontSize = "Micro"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Start"/>
+               <StackLayout Orientation="Vertical" VerticalOptions="Center" Spacing="-3">
+                    <Label x:Name="TitleAsset"
+                        Text = "資産状況"
+                        TextColor = "White"
+                        FontSize = "Micro"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Start"/>
+                    <Label x:Name="AssetM"
+                        Text = "Results"
+                        TextColor = "Lime"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Start"
+                        FontSize = "Small"/>
+                </StackLayout>
 
-
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" Spacing="-3">
+                    <Label x:Name="TitleTotal"
+                        Text = "投資総額"
+                        TextColor = "White"
+                        FontSize = "Micro"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Start"/>
+                    <Label x:Name="Investmen"
+                        Text = "{Binding PayAssetprice, StringFormat='{0:N1}'}"
+                        TextColor = "Yellow"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Center"
+                        FontSize = "Small"/>
+                 </StackLayout>
                 
-
-                <Label x:Name="TitleTotal"
-                    Text = "投資総額"
-                    TextColor = "White"
-                    FontSize = "Micro"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Start"/>
-
-                <Label x:Name="TitleStock"
-                    Text = "時価総額"
-                    TextColor = "White"
-                    FontSize = "Micro"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Start"/>
-                <Label x:Name="Value"
-                    Text = "損益"
-                    TextColor = "White"
-                    FontSize = "Micro"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Start"/>
+                 <StackLayout Orientation="Vertical" VerticalOptions="Center" Spacing="-3">
+                    <Label x:Name="TitleStock"
+                        Text = "時価総額"
+                        TextColor = "White"
+                        FontSize = "Micro"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Start"/>
+                    <Label x:Name="TotalAsset"
+                        Text = "{Binding TotalAsset, StringFormat='{0:N1}'}"
+                        TextColor = "Yellow"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Center"
+                        FontSize = "Small"/>
+                </StackLayout>
             </StackLayout>
+            
+            <StackLayout>
+                <StackLayout Orientation="Vertical" Spacing="-3" VerticalOptions="StartAndExpand">
+                    <Label x:Name="Value"
+                        Text = "損益"
+                        TextColor = "White"
+                        FontSize = "Micro"
+                        WidthRequest = "100"
+                        HorizontalTextAlignment = "Center"
+                        VerticalTextAlignment = "Start"/>
+                    <Button x:Name="GainButton"
+                        Command="{Binding PersonalUp}"
+                        Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
+                        BackgroundColor="Orange"    
+                        TextColor="Black"/>
+                        <!--"FontAttributes.Bold | FontAttributes.Italic"-->
+                </StackLayout>
+             </StackLayout>
 
-
-            <StackLayout x:Name="IAssetLayout" Padding="0,0,0,0" Orientation = "Horizontal" HorizontalOptions="StartAndExpand" >
-                <Label x:Name="AssetM"
-                    Text = "Results"
-                    TextColor = "Lime"
-                    BackgroundColor="Black"   
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"
-                    FontSize = "Small"/>
-                <Label x:Name="Investmen"
-                    Text = "{Binding PayAssetprice, StringFormat='{0:N1}'}"
-                    TextColor = "Yellow"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"
-                    FontSize = "Small"/>
-                <Label x:Name="TotalAsset"
-                    Text = "{Binding TotalAsset, StringFormat='{0:N1}'}"
-                    TextColor = "Yellow"
-                    WidthRequest = "100"
-                    HorizontalTextAlignment = "Center"
-                    VerticalTextAlignment = "Center"
-                    FontSize = "Small"/>
-                <Button x:Name="GainButton"
-                    Command="{Binding PersonalUp}"
-                    Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
-                    BackgroundColor="Orange"    
-                    TextColor="Black"/>
-                    <!--"FontAttributes.Bold | FontAttributes.Italic"-->
-            </StackLayout>
          </StackLayout>
 
 
