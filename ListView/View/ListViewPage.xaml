@@ -33,7 +33,6 @@
                     Text = "{Binding Prev_day}"
                     TextColor = "Black"
                     FontSize="13"
-                    BackgroundColor="Gray"
                     CommandParameter="{Binding FirstLastName}"
                     HeightRequest="40"
                     WidthRequest="70">
@@ -229,14 +228,14 @@
                                     <Label  Text = "Itemprice"
                                         TextColor="Gray"
                                         FontSize="Micro" 
-                                        WidthRequest = "80"
+                                        WidthRequest = "90"
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Itemprice"
                                         Text = "{Binding Itemprice}"
                                         TextColor = "White"
                                         FontSize="Default"     
-                                        WidthRequest = "80"   
+                                        WidthRequest = "90"   
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     </StackLayout>

@@ -487,7 +487,15 @@ namespace ListView
         {
             Price IndnAnser = await Models.Getserchi("^DJI");
             Price Ni255Anser = await Models.Getserchi("998407");
-                      
+
+
+            var IndnButton = new Button();
+            IndnButton.SetBinding(Button.BackgroundColorProperty, new Binding("."));
+            IndnButton.BackgroundColor = Color.Black;///*BindingContext*/ = "Gray";// new {BackgroundColor = IndnAnser.Prev_day };
+            //Debug.WriteLine(label.Text); //prints "John Doe"
+
+
+
 
             // Name = IndnAnser.Name,
             Prev_day = IndnAnser.Prev_day;//前日比±**
@@ -496,7 +504,7 @@ namespace ListView
             FirstLastName = IndnAnser.FirstLastName;
             Polar = IndnAnser.Polar;
             ButtonId = 0;
-            View.IndnButtonColor(IndnAnser.Polar);
+            //View.IndnButtonColor(IndnAnser.Polar);
 
 
             //Name = Ni255Anser.Name;// "Sony",
