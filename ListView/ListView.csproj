@@ -45,6 +45,7 @@
       <DependentUpon>ListViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Finance.cs" />
+    <Compile Include="IntToBoolConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

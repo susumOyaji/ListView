@@ -489,28 +489,28 @@ namespace ListView
             Price Ni255Anser = await Models.Getserchi("998407");
 
 
-            var IndnButton = new Button { BackgroundColor = Color.Brown };
+            //var IndnButton = new Button { BackgroundColor = Color.Brown };
 
-            Binding binding = new Binding(nameof(IndnAnser.Polar)) { Source = IndnAnser };
-            IndnButton.SetBinding(Button.BackgroundColorProperty, binding);
+            //Binding binding = new Binding(nameof(IndnAnser.Polar)) { Source = IndnAnser };
+            //IndnButton.SetBinding(Button.BackgroundColorProperty, binding);
            
 
-            // Changes source value.
-            IndnAnser.ButtonColor = "Red";
+            //// Changes source value.
+            //IndnAnser.ButtonColor = "Red";
 
 
 
-            // Binding Target (DependencyObject).
-            var Goingprice = new Label { Text = "Default" };
+            //// Binding Target (DependencyObject).
+            //var Goingprice = new Label { Text = "Default" };
           
 
-            // Binds target to source.
-            var binding1 = new Binding(nameof(IndnAnser.Realprice)) { Source = IndnAnser };
-            Goingprice.SetBinding(Label.TextProperty, binding1);
+            //// Binds target to source.
+            //var binding1 = new Binding(nameof(IndnAnser.Realprice)) { Source = IndnAnser };
+            //Goingprice.SetBinding(Label.TextProperty, binding1);
         
 
             // Changes source value.
-            IndnAnser.Realprice = 99999;
+            //IndnAnser.Realprice = 99999;
           
 
 
@@ -531,7 +531,7 @@ namespace ListView
             Percent = IndnAnser.Percent;//前日比％**// "5"
             FirstLastName = IndnAnser.FirstLastName;
             Polar = IndnAnser.Polar;
-            ButtonColor = IndnAnser.ButtonColor;
+            ButtonColor = IndnAnser.Polar;
             ButtonId = 0;
             //View.IndnButtonColor(IndnAnser.Polar);
 
