@@ -94,16 +94,7 @@ namespace ListView
         //    }
         //}
 
-        private static string _buttonColor;
-        public string ButtonColor
-        {
-            get { return _buttonColor; }
-            set
-            {
-                _buttonColor = value;
-                this.OnPropertyChanged(nameof(ButtonColor));
-            }
-        }
+    
 
 
 
@@ -374,6 +365,31 @@ namespace ListView
                 this.OnPropertyChanged(nameof(Ni255FirstLastName));
             }
         }
+
+
+        private static string _Ni255polar;
+        public string Ni255Polar//(-)下落
+        {
+            get { return _Ni255polar; }
+            set
+            {
+                _Ni255polar = value;
+                // StockMvvmView.ChangeButtonColor(_polar);
+                this.OnPropertyChanged(nameof(Ni255Polar));
+            }
+        }
+
+        private static string _buttonColor;
+        public string ButtonColor
+        {
+            get { return _buttonColor; }
+            set
+            {
+                _buttonColor = value;
+                this.OnPropertyChanged(nameof(ButtonColor));
+            }
+        }
+
         //public static string[] _pwhichOn;
         //public string[] PWhichOne
         //{
@@ -531,7 +547,7 @@ namespace ListView
             Percent = IndnAnser.Percent;//前日比％**// "5"
             FirstLastName = IndnAnser.FirstLastName;
             Polar = IndnAnser.Polar;
-            ButtonColor = IndnAnser.Polar;
+            //ButtonColor = IndnAnser.Polar;
             ButtonId = 0;
             //View.IndnButtonColor(IndnAnser.Polar);
 
@@ -542,9 +558,9 @@ namespace ListView
             Ni255Realprice = Ni255Anser.Realprice;//現在値*
             Ni255Percent = Ni255Anser.Percent;//前日比％**// "5"
             Ni255FirstLastName = Ni255Anser.FirstLastName;
-           
+            Ni255Polar = Ni255Anser.Polar;
             ButtonId = 1;
-            View.Ni255ButtonColor(Ni255Anser.Polar);
+           // View.Ni255ButtonColor(Ni255Anser.Polar);
 
         }
 
@@ -676,7 +692,8 @@ namespace ListView
                     Percent = item.Percent,//前日比％**// "5"
                     Gain = item.Gain,//損益
                     ButtonId = i.ToString(),
-                    ButtonColor = item.Polar,
+                   // ButtonColor = item.Polar,
+                    Polar= item.Polar
                     //FirstLastName = item.FirstLastName
                 });
 

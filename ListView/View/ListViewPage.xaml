@@ -12,7 +12,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:IntToBoolConverter x:Key="intToBool" />
+            <local:NullToDefaultConverter x:Key="NullToDef" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -29,7 +29,7 @@
                     VerticalTextAlignment = "Center"
                     FontSize = "15"/>
                 <Label x:Name="Goingprice"
-                    Text = "{Binding Realprice, StringFormat='{0:N1}'}"
+                    Text = "{Binding Realprice, StringFormat='{0:C0}'}"
                     TextColor = "White"
                     WidthRequest = "150"
                     HorizontalTextAlignment = "End"
@@ -37,8 +37,8 @@
                 <Button x:Name="IndnButton"
                     Text = "{Binding Prev_day}"
                     TextColor = "Black"
-                    FontSize="13"
-                    BackgroundColor="{Binding ButtonColor ,Converter={StaticResource intToBool}}"
+                    FontSize="12"
+                    BackgroundColor="{Binding Polar ,Converter={StaticResource NullToDef}}"
                     CommandParameter="{Binding FirstLastName}"
                     HeightRequest="40"
                     WidthRequest="70">
@@ -61,7 +61,7 @@
                     VerticalTextAlignment = "Center"
                     FontSize = "15"/>
                 <Label x:Name="Ni255Goingprice"
-                    Text = "{Binding Ni255Realprice, StringFormat='{0:N1}'}"
+                    Text = "{Binding Ni255Realprice, StringFormat='{0:N0}'}"
                     TextColor = "White"
                     WidthRequest = "150"
                     HorizontalTextAlignment = "End"
@@ -70,8 +70,8 @@
                     
                     Text = "{Binding Ni255Prev_day}"
                     TextColor = "Black"
-                    FontSize="13"
-                    BackgroundColor="Gray"
+                    FontSize="12"
+                    BackgroundColor="{Binding Ni255Polar ,Converter={StaticResource NullToDef}}"    
                     CommandParameter="{Binding Ni255FirstLastName}"
                     HeightRequest="40"
                     WidthRequest="70">
@@ -126,7 +126,7 @@
                         HorizontalTextAlignment = "Center"
                         VerticalTextAlignment = "Start"/>
                     <Label x:Name="Investmen"
-                        Text = "{Binding PayAssetprice, StringFormat='{0:N1}'}"
+                        Text = "{Binding PayAssetprice, StringFormat='{0:N0}'}"
                         TextColor = "Yellow"
                         WidthRequest = "100"
                         HorizontalTextAlignment = "Center"
@@ -143,7 +143,7 @@
                         HorizontalTextAlignment = "Center"
                         VerticalTextAlignment = "Start"/>
                     <Label x:Name="TotalAsset"
-                        Text = "{Binding TotalAsset, StringFormat='{0:N1}'}"
+                        Text = "{Binding TotalAsset, StringFormat='{0:N0}'}"
                         TextColor = "Yellow"
                         WidthRequest = "100"
                         HorizontalTextAlignment = "Center"
@@ -163,7 +163,7 @@
                         VerticalTextAlignment = "Start"/>
                     <Button x:Name="GainButton"
                         Command="{Binding PersonalUp}"
-                        Text="{Binding UptoAsset, StringFormat='{0:N1}'}"
+                        Text="{Binding UptoAsset, StringFormat='{0:N0}'}"
                         BackgroundColor="Orange"    
                         TextColor="Black"/>
                         <!--"FontAttributes.Bold | FontAttributes.Italic"-->
@@ -271,7 +271,7 @@
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Gain"
-                                        Text = "{Binding Path= Gain, StringFormat='{0:N1}'}"
+                                        Text = "{Binding Path= Gain, StringFormat='{0:N0}'}"
                                         TextColor = "White"
                                         WidthRequest = "150"
                                         FontSize="Default"   
@@ -287,7 +287,7 @@
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "MarketCapitalization"
-                                        Text = "{Binding RealValue, StringFormat='{0:N1}'}"
+                                        Text = "{Binding RealValue, StringFormat='{0:N0}'}"
                                         TextColor = "White"
                                         FontSize="Default"  
                                         WidthRequest = "150"   
@@ -307,7 +307,7 @@
                                         FontSize="Micro"
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "End"/>
-                                <Button x:Name="Event" Text="{Binding Prev_day}" BackgroundColor="{Binding ButtonColor}"
+                                <Button x:Name="Event" Text="{Binding Prev_day}" BackgroundColor="{Binding Polar}"
                                         CommandParameter="{Binding FirstLastName}"
                                         HeightRequest="40"
                                         WidthRequest="70">
