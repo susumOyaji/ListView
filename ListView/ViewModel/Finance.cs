@@ -30,7 +30,7 @@ namespace ListView
                 p.Itemprice = Convert.ToInt64(cols[2]);//購入単価
                
                 prices.Add(p);
-                //++ButtonIdIndex;
+               
             }
             return prices;
         }
@@ -53,13 +53,10 @@ namespace ListView
         public decimal Investmens { get; set; }//投資総額
         public decimal UptoAsset { get; set; }//個別利益
         public decimal TotalAsset { get; set; }//現在評価額合計
-        public string  ButtonId { get; set; }
-        public string ButtonColor { get; set; }
+        //public string  ButtonId { get; set; }
+        //public string ButtonColor { get; set; }
         public decimal Gain { get; set; }//損益
         public string FirstLastName { get { return Prev_day + "," + Percent; } }
-
-
-       
 
     }
 

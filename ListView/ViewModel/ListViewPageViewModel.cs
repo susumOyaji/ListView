@@ -5,6 +5,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Threading.Tasks;
+
+
 using Xamarin.Forms;
 
 
@@ -22,21 +24,13 @@ namespace ListView
         /// View への参照
         /// </summary>
         public ListViewPage View { get; set; }
-
-        /// <summary>
-        /// ListView へ表示するデータ
-        /// </summary>
-        //ObservableCollection<string> ItemList { get; } = new ObservableCollection<string>(new[] { "item01", "item02", "item03", });
+      
 
 
-
-
-
+        public ICommand ModelOnLabel { get; }
         /// <summary>
         /// ListView の各 Item 内の Button にバインディングする Command
         /// </summary>
-        //public ICommand IndnButtonClick { protected set; get; }
-        //public ICommand Ni255ButtonClick { protected set; get; }
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
         // LiseViewのButtonにバインディングするCommand
@@ -44,88 +38,9 @@ namespace ListView
         public ICommand RefreshCommand { get; private set; }
 
         public ObservableCollection<Price> ItemList { get; set; }
-        // public ObservableCollection<Price> ItemStd { get; set; }
-
+       
 
         #region  OnPropertyChanged
-        //private static decimal _currentStockPrice;
-        //public decimal NewYorkStockPrice
-        //{
-        //    get { return _currentStockPrice; }
-        //    set
-        //    {
-        //        _currentStockPrice = value;
-        //        this.OnPropertyChanged(nameof(NewYorkStockPrice));
-        //    }
-        //}
-
-
-
-        //private static string _currentStockPercent;
-        //public string NewYorkStockPercent
-        //{
-        //    get { return _currentStockPercent; }
-        //    set
-        //    {
-        //        _currentStockPercent = value;
-        //        this.OnPropertyChanged(nameof(NewYorkStockPercent));
-        //    }
-        //}
-
-        //private static decimal _currentTokyoStockPrice;
-        //public decimal TokyoStockPrice
-        //{
-        //    get { return _currentTokyoStockPrice; }
-        //    set
-        //    {
-        //        _currentTokyoStockPrice = value;
-        //        this.OnPropertyChanged(nameof(TokyoStockPrice));
-        //    }
-        //}
-
-        //private static string _currentTokyoStockPercent;
-        //public string TokyoStockPercent
-        //{
-        //    get { return _currentTokyoStockPercent; }
-        //    set
-        //    {
-        //        _currentTokyoStockPercent = value;
-        //        this.OnPropertyChanged(nameof(TokyoStockPercent));
-        //    }
-        //}
-
-    
-
-
-
-        //private static string _gainColor;
-        //public string GainColor
-        //{
-        //    get { return _gainColor; }
-        //    set
-        //    {
-        //        _gainColor = value;
-        //        this.OnPropertyChanged(nameof(GainColor));
-        //    }
-        //}
-
-
-
-
-        //private static string _currentColor;
-        //public string NYorkButtonColor
-        //{
-        //    get { return _currentColor; }
-        //    set
-        //    {
-        //        _currentColor = value;
-        //        this.OnPropertyChanged(nameof(NYorkButtonColor));
-        //    }
-        //}
-
-        #endregion
-
-        #region  PropertyChanged
         private static decimal _payAssetprice;
         public decimal PayAssetprice//保有数* 購入価格 = 投資総額
         {
@@ -174,16 +89,6 @@ namespace ListView
         }
 
 
-        private static int _id;
-        public int ButtonId//保有数*
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                this.OnPropertyChanged(nameof(ButtonId));
-            }
-        }
 
 
         private static string inputString = "";
@@ -251,20 +156,6 @@ namespace ListView
             }
         }
 
-        public static string _whichOn;
-        public string WhichOne
-        {
-            get { return _whichOn; }
-            set
-            {
-                if (_whichOn != value)
-                {
-                    _whichOn = value;
-                }
-                _whichOn = value;
-                this.OnPropertyChanged(nameof(WhichOne));
-            }
-        }
 
 
         //Ni255
@@ -319,21 +210,7 @@ namespace ListView
             }
         }
 
-        public static string _Ni255whichOn;
-        public string Ni255WhichOne
-        {
-            get { return _Ni255whichOn; }
-            set
-            {
-                if (_Ni255whichOn != value)
-                {
-                    _Ni255whichOn = value;
-                }
-                _Ni255whichOn = value;
-                this.OnPropertyChanged(nameof(Ni255WhichOne));
-            }
-        }
-
+     
       
         public static string _firstLastName;
         public string FirstLastName
@@ -379,49 +256,9 @@ namespace ListView
             }
         }
 
-        private static string _buttonColor;
-        public string ButtonColor
-        {
-            get { return _buttonColor; }
-            set
-            {
-                _buttonColor = value;
-                this.OnPropertyChanged(nameof(ButtonColor));
-            }
-        }
+      
 
-        //public static string[] _pwhichOn;
-        //public string[] PWhichOne
-        //{
-        //    get { return _pwhichOn; }
-        //    set
-        //    {
-        //        if (_pwhichOn != value)
-        //        {
-        //            _pwhichOn = value;
-        //        }
-        //        _pwhichOn = value;
-        //        this.OnPropertyChanged(nameof(PWhichOne));
-        //    }
-        //}
-
-
-
-
-        // ListView.IsRefreshingと同期させるプロパティ
-        //private bool isRefreshing;
-        //public bool IsRefreshing
-        //{
-        //    get { return isRefreshing; }
-        //    set
-        //    {
-        //        if (value == isRefreshing)
-        //            return;
-        //        isRefreshing = value;
-        //        this.OnPropertyChanged(nameof(IsRefreshing));
-        //    }
-        //}
-
+      
 
 
 
@@ -434,11 +271,7 @@ namespace ListView
         /// </summary>
         public ListViewPageViewModel()
         {
-            //IndnButtonClick = new CountUpCommand(Indnswitch);
-            //Ni255ButtonClick = new CountUpCommand(Ni255switch);
-           
             ItemList = new ObservableCollection<Price>();
-        
             RefCommand = new CountUpCommand(IncrementData);
 
             RefreshCommand = new Command<string>((key) =>
@@ -454,15 +287,21 @@ namespace ListView
             });
                      
             StdStock();
-            // Ni255Stock();
-            //Sample();
             DispSet(false);
 
         }
 
+
+
+
         #region メソッド
 
+        public void OnLabelClicked(MenuItem item)
+        {
+            //private async void OnLabelClicked()
+            Models.OnLabelClickedModels(item);
 
+        }
 
 
 
@@ -475,8 +314,7 @@ namespace ListView
           
 
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
-            //pricesanser[index].PriceSwith();
-            //ItemList[index].PriceSwith();
+          
 
             ItemList[index] = (new Price
             {
@@ -488,8 +326,8 @@ namespace ListView
                 RealValue = pricesanser[index].RealValue,// 100,
                 Percent = pricesanser[index].Percent,//前日比％**// "5"
                 Gain = pricesanser[index].Gain,//損益
-                ButtonId = index.ToString(),
-                ButtonColor = pricesanser[index].Polar,
+                //ButtonId = index.ToString(),
+                //ButtonColor = pricesanser[index].Polar,
                
             });
 
@@ -505,120 +343,26 @@ namespace ListView
             Price Ni255Anser = await Models.Getserchi("998407");
 
 
-            //var IndnButton = new Button { BackgroundColor = Color.Brown };
-
-            //Binding binding = new Binding(nameof(IndnAnser.Polar)) { Source = IndnAnser };
-            //IndnButton.SetBinding(Button.BackgroundColorProperty, binding);
-           
-
-            //// Changes source value.
-            //IndnAnser.ButtonColor = "Red";
-
-
-
-            //// Binding Target (DependencyObject).
-            //var Goingprice = new Label { Text = "Default" };
-          
-
-            //// Binds target to source.
-            //var binding1 = new Binding(nameof(IndnAnser.Realprice)) { Source = IndnAnser };
-            //Goingprice.SetBinding(Label.TextProperty, binding1);
-        
-
-            // Changes source value.
-            //IndnAnser.Realprice = 99999;
-          
-
-
-
-            //XAML
-            //< TextBox Height = "24"  Width = "120" Text = "{Binding Path=Name}" />
-
-            //C#Code
-            ////設定
-            //Binding binding = new Binding("Name");
-            //textBox1.SetBinding(TextBox.TextProperty, binding);
-
-
-
             // Name = IndnAnser.Name,
             Prev_day = IndnAnser.Prev_day;//前日比±**
             Realprice = IndnAnser.Realprice;//現在値*
             Percent = IndnAnser.Percent;//前日比％**// "5"
             FirstLastName = IndnAnser.FirstLastName;
             Polar = IndnAnser.Polar;
-            //ButtonColor = IndnAnser.Polar;
-            ButtonId = 0;
-            //View.IndnButtonColor(IndnAnser.Polar);
-
-
-            //Name = Ni255Anser.Name;// "Sony",
+           
             //Itemprice = Ni255Anser.Itemprice;// 2015,
             Ni255Prev_day = Ni255Anser.Prev_day;//前日比±**
             Ni255Realprice = Ni255Anser.Realprice;//現在値*
             Ni255Percent = Ni255Anser.Percent;//前日比％**// "5"
             Ni255FirstLastName = Ni255Anser.FirstLastName;
             Ni255Polar = Ni255Anser.Polar;
-            ButtonId = 1;
-           // View.Ni255ButtonColor(Ni255Anser.Polar);
-
+                   
         }
 
 
-        //private void Indnswitch()
-        //{
-        //    if (WhichOne == Percent)
-        //    {
-        //        WhichOne = Prev_day;
-        //    }
-        //    else
-        //    {
-        //        WhichOne = Percent;
-        //    }
-        //}
-
-        //private void Ni255switch()
-        //{
-        //    if (Ni255WhichOne == Ni255Percent)
-        //    {
-        //        Ni255WhichOne = Ni255Prev_day;
-        //    }
-        //    else
-        //    {
-        //        Ni255WhichOne = Ni255Percent;
-        //    }
-        //}
-
-
-        //private async void Ni255Stock()
-        //{
-        //    var anser = await Models.Getserchi("998407");
-
-        //    TokyoStockPrice = anser.Realprice;
-        //    TokyoStockPercent = anser.Prev_day;
-        //    //View.Ni255ButtonColor(anser.Polar);
-
-
-        //    if (anser.Polar == "-")
-        //    {
-        //        //NewYorkStockPercent = anser.Percent;
-        //        NYorkButtonColor = "Green";
-        //    }
-        //    if (anser.Polar == "+")
-        //    {
-        //        //NewYorkStockPercent = Dayratio;
-        //        NYorkButtonColor = "Red";
-        //    }
-
-        //}
-
         #endregion
 
-        //public ICommand Loss { get; } //ListView の各 Item 内の Button にバインディングする Command
-
-
-
-
+      
         /// <summary>
         /// ListView の Button 押下時の動作
         /// </summary>
@@ -637,19 +381,13 @@ namespace ListView
 
         private void Sample()
         {
-            //ItemList = new ObservableCollection<Price>();
-            //TopList = new ObservableCollection<CityPrice>();
-
-
-            ItemList.Add(new Price
+           ItemList.Add(new Price
             {
                 Name = "SampleSony",
                 Stocks = 100,
                 Itemprice = 2015,
                 Realprice = 1000,
                 RealValue = 100,
-                ButtonId = "Sample",
-                ButtonColor = "Red",
                 Percent = "5"
             });
 
@@ -669,7 +407,7 @@ namespace ListView
 
 
             // UTF8のファイルの書き込み Edit. 
-            string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
+            //string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
                                                                                                              // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
             
@@ -691,7 +429,7 @@ namespace ListView
                     RealValue = item.RealValue,// 100,
                     Percent = item.Percent,//前日比％**// "5"
                     Gain = item.Gain,//損益
-                    ButtonId = i.ToString(),
+                    //ButtonId = i.ToString(),
                    // ButtonColor = item.Polar,
                     Polar= item.Polar
                     //FirstLastName = item.FirstLastName
@@ -735,9 +473,7 @@ namespace ListView
                     Realprice = item.Realprice,//現在値*// 1000,
                     RealValue = item.RealValue,// 100,
                     Percent = item.Percent,//前日比％**// "5"
-                    ButtonId = i.ToString(),
-                    ButtonColor = item.Polar
-
+                   
                 });
                 PayAssetpriceAdd = PayAssetpriceAdd + (priceanser[i].Stocks * Convert.ToDecimal(priceanser[i].Itemprice));//株数*購入単価の合計
                 TotalAssetAdd = TotalAssetAdd + (priceanser[i].Stocks * Convert.ToDecimal(priceanser[i].Realprice));//現在評価額
@@ -756,7 +492,6 @@ namespace ListView
         public void IncrementData()
         {
             StdStock();
-            // Ni255Stock();
             DispSet(true);
         }
         
@@ -784,6 +519,45 @@ namespace ListView
         }
     }
 
+   
+
 
 
 }
+
+/*------------------------- Binding Sample -------------------------------------- 
+//var IndnButton = new Button { BackgroundColor = Color.Brown };
+
+//Binding binding = new Binding(nameof(IndnAnser.Polar)) { Source = IndnAnser };
+//IndnButton.SetBinding(Button.BackgroundColorProperty, binding);
+
+
+//// Changes source value.
+//IndnAnser.ButtonColor = "Red";
+
+
+
+//// Binding Target (DependencyObject).
+//var Goingprice = new Label { Text = "Default" };
+
+
+//// Binds target to source.
+//var binding1 = new Binding(nameof(IndnAnser.Realprice)) { Source = IndnAnser };
+//Goingprice.SetBinding(Label.TextProperty, binding1);
+
+
+// Changes source value.
+//IndnAnser.Realprice = 99999;
+
+
+
+
+//XAML
+//< TextBox Height = "24"  Width = "120" Text = "{Binding Path=Name}" />
+
+//C#Code
+////設定
+//Binding binding = new Binding("Name");
+//textBox1.SetBinding(TextBox.TextProperty, binding);
+
+----------------------------------------------------------------------------------*/

@@ -17,9 +17,6 @@ namespace ListView
     public class Models : ContentPage
     {
       
-        static bool NewyorkFlipflop = true;
-        static bool TokyoFlipflop = true;
-       
         static void ModelS(){}//MainModel to end
 
         internal static int Incriment(int number)
@@ -29,40 +26,6 @@ namespace ListView
         }
 
 
-        internal static async Task<Price> NewYorkPrceAsync()
-        {
-            Price anser = await Getserchi("^DJI");//NewYork Data to Ref.
-           
-            if (NewyorkFlipflop)
-            {
-                //coler = "Red";
-            }
-            else
-            {
-                //coler = "Green";
-            }
-            NewyorkFlipflop = !NewyorkFlipflop;
-            return anser;
-        }
-
-
-
-        internal static async Task<string> TokyoPrceAsync(string coler)
-        {
-            await Getserchi("998407");//Tokyo Data to Ref.
-
-            if (TokyoFlipflop)
-            {
-                coler = "Red";
-            }
-            else
-            {
-                coler = "Green";
-            }
-            TokyoFlipflop = !TokyoFlipflop;
-            return coler;
-          
-        }
 
 
 
@@ -243,8 +206,6 @@ namespace ListView
                     Value = "";
                     YenRatio = "";
                     PercentRatio = "";
-                    ///
-                    //Pasonalresponce[index] = price.Name + ","+ Convert.ToString(price.Stocks) + "," + Convert.ToString(price.Itemprice);
                     index = index + 1;
                 }
                 catch (Exception)
@@ -268,10 +229,10 @@ namespace ListView
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        private async void OnLabelClicked(object sender, EventArgs e)
+        public static void OnLabelClickedModels(MenuItem sender )
         {
-            var str = ((Label)sender).Text;
-            string strId = ((Label)sender).StyleId;
+            var str = ((MenuItem)sender).Text;
+            string strId = ((MenuItem)sender).StyleId;
             int StrId = Convert.ToInt16(strId);
             var i = 0;
 
@@ -289,47 +250,47 @@ namespace ListView
             //Edit.Clicked += (object s, EventArgs f) => Edit_Completed(sender, e, StrId);
             Edit.IsEnabled = false;
 
-            Content = new StackLayout
-            {
-                Padding = 20,
-                BackgroundColor = Color.White,
-                VerticalOptions = LayoutOptions.Start,
-                Children = { usercode, usercost, usershares,
-                    new StackLayout
-                    {
-                        HorizontalOptions = LayoutOptions.Center,
-                        Orientation = StackOrientation.Horizontal,
-                        Children ={
-                            Save,Cancel,Edit
-                        }
-                     }
-                }
-            };
+            //Content = new StackLayout
+            //{
+            //    Padding = 20,
+            //    BackgroundColor = Color.White,
+            //    VerticalOptions = LayoutOptions.Start,
+            //    Children = { usercode, usercost, usershares,
+            //        new StackLayout
+            //        {
+            //            HorizontalOptions = LayoutOptions.Center,
+            //            Orientation = StackOrientation.Horizontal,
+            //            Children ={
+            //                Save,Cancel,Edit
+            //            }
+            //         }
+            //    }
+            //};
 
 
-            if (str != "Add")
-            {
-                Save.IsEnabled = false;
-                Edit.IsEnabled = true;
+            //if (str != "Add")
+            //{
+            //    Save.IsEnabled = false;
+            //    Edit.IsEnabled = true;
 
-                // UTF8のファイルの読み込み Edit.        
-                string responce = await StorageControl.PCLLoadCommand();//登録データ読み込み
-                List<Price> prices = Finance.Parse(responce);
+            //    // UTF8のファイルの読み込み Edit.        
+            //    string responce = await StorageControl.PCLLoadCommand();//登録データ読み込み
+            //    List<Price> prices = Finance.Parse(responce);
 
-                string[] responceAray = new string[prices.Count * 3];
+            //    string[] responceAray = new string[prices.Count * 3];
 
-                foreach (Price price in prices)
-                {
-                    responceAray[0 + i] = price.Name;
-                    responceAray[1 + i] = Convert.ToString(price.Stocks);
-                    responceAray[2 + i] = Convert.ToString(price.Itemprice) + '\n';
-                    i = i + 3;
-                }
-                usercode.Text = responceAray[0 + StrId * 3];//price.Name;
-                usercost.Text = responceAray[1 + StrId * 3];//price.Stocks;
-                usershares.Text = responceAray[2 + StrId * 3];//price.Itemprice;
-                //await DisplayAlert("Anser", "ID= " + strId + "    " + Convert.ToString(prices[StrId].Name), "Ok");
-            }
+            //    foreach (Price price in prices)
+            //    {
+            //        responceAray[0 + i] = price.Name;
+            //        responceAray[1 + i] = Convert.ToString(price.Stocks);
+            //        responceAray[2 + i] = Convert.ToString(price.Itemprice) + '\n';
+            //        i = i + 3;
+            //    }
+            //    usercode.Text = responceAray[0 + StrId * 3];//price.Name;
+            //    usercost.Text = responceAray[1 + StrId * 3];//price.Stocks;
+            //    usershares.Text = responceAray[2 + StrId * 3];//price.Itemprice;
+            //    //await DisplayAlert("Anser", "ID= " + strId + "    " + Convert.ToString(prices[StrId].Name), "Ok");
+            //}
 
 
         }
