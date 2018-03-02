@@ -229,7 +229,7 @@ namespace ListView
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        public static void OnLabelClickedModels(MenuItem sender )
+        public static  void OnLabelClickedModels(MenuItem sender )
         {
             var str = ((MenuItem)sender).Text;
             string strId = ((MenuItem)sender).StyleId;
@@ -267,6 +267,7 @@ namespace ListView
             //    }
             //};
 
+            
 
             //if (str != "Add")
             //{

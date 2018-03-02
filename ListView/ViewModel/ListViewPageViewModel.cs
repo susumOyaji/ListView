@@ -24,8 +24,8 @@ namespace ListView
         /// View への参照
         /// </summary>
         public ListViewPage View { get; set; }
-      
-
+       
+        
 
         public ICommand ModelOnLabel { get; }
         /// <summary>
@@ -33,6 +33,7 @@ namespace ListView
         /// </summary>
         public ICommand ItemCommand { protected set; get; }
         public ICommand RefCommand { protected set; get; }
+        //public ICommand EditTapp {set; get; }
         // LiseViewのButtonにバインディングするCommand
         // ListViewを引っ張った時に実行させるコマンド
         public ICommand RefreshCommand { get; private set; }
@@ -273,6 +274,7 @@ namespace ListView
         {
             ItemList = new ObservableCollection<Price>();
             RefCommand = new CountUpCommand(IncrementData);
+            //EditTapp = new CountUpCommand(OnLabelClicked);
 
             RefreshCommand = new Command<string>((key) =>
             {
@@ -296,8 +298,9 @@ namespace ListView
 
         #region メソッド
 
-        public void OnLabelClicked(MenuItem item)
+        public static  void OnLabelClicked(MenuItem item )
         {
+            //Models Model = new Models();
             //private async void OnLabelClicked()
             Models.OnLabelClickedModels(item);
 

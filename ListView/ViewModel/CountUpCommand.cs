@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ListView
 {
@@ -8,6 +9,7 @@ namespace ListView
         #region メンバ変数
 
         private readonly Action _action;
+        private Action<MenuItem> onLabelClicked;
 
         #endregion
 
@@ -22,6 +24,11 @@ namespace ListView
         internal  CountUpCommand(Action action)
         {
             this._action = action;
+        }
+
+        public CountUpCommand(Action<MenuItem> onLabelClicked)
+        {
+            this.onLabelClicked = onLabelClicked;
         }
 
         #endregion
