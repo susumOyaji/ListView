@@ -38,7 +38,7 @@ namespace ListView
         public void OnMore(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
-            DisplayAlert("More Context Action", mi.CommandParameter + " more context action", "OK");
+            DisplayAlert("More Context Action", e.ToString() + " more context action", "OK");
         }
 
         public void OnDelete(object sender, EventArgs e)
@@ -82,21 +82,18 @@ namespace ListView
 
             //this.BindingContext = stackLayout;
 
-
+            //mi.CommandParameter as ContactHistoryItem
 
             MenuItem mi = ((MenuItem)sender);
             var par = mi.CommandParameter;
-            var selectedText =  this.DisplayActionSheet(
-                                    "Edit", "Close", "Chancel",
-                                    new string[] { Convert.ToString(par), "すいか", "ぶどう" });
-            var ans = Convert.ToString(par);
-
+            var selectedText =  this.DisplayActionSheet("Edit", "Close", "Chancel", new string[] {"qqqq", "すいか", "ぶどう"});
+           
             if (selectedText != null)
             {
                 //buttonDialog2.Text = selectedText;
             }
 
-            // DisplayAlert("Edit Context Action", par.ToString() + " edit context action", "OK");
+            DisplayAlert("Edit Context Action", e.ToString() + " edit context action", "OK");
 
             //ListViewPageViewModel.OnLabelClicked(mi);
 
@@ -113,6 +110,30 @@ namespace ListView
             ((ListViewPage)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
           
         }
+
+       
+        /// <summary>
+        /// ListViewの項目選択時に呼ばれる
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            DisplayAlert("Item Selected", e.SelectedItem.ToString(), "Ok");
+            var lblSelected_Text = e.SelectedItem.ToString();
+        }
+        /// <summary>
+        /// 項目タップ時に呼ばれる
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
+            this.AddButton.Text = e.Item.ToString();
+        }
+
+
       
     }
 }

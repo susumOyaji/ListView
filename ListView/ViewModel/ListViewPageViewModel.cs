@@ -410,7 +410,7 @@ namespace ListView
 
 
             // UTF8のファイルの書き込み Edit. 
-            //string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846");//登録データ書き込み
+            string write = await StorageControl.PCLSaveCommand("6758,200,1665\n9837,200,712\n6976,200,1846\n6502,0,0\n");//登録データ書き込み
                                                                                                              // List<Price> prices = Finance.Parse(await StorageControl.PCLLoadCommand());//登録データ読み込み
             List<Price> pricesanser = await Models.PasonalGetserchi();//登録データの現在値を取得する
             

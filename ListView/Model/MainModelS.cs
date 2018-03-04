@@ -234,7 +234,7 @@ namespace ListView
             var str = ((MenuItem)sender).Text;
             string strId = ((MenuItem)sender).StyleId;
             int StrId = Convert.ToInt16(strId);
-            var i = 0;
+            //var i = 0;
 
             var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
             var usercost = new Entry { Placeholder = "株数", Keyboard = Keyboard.Numeric };
