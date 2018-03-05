@@ -8,7 +8,8 @@ namespace ListView
         {
             InitializeComponent();
 
-            MainPage = new ListViewPage();
+            MainPage = new NavigationPage(new ListViewPage()); //MainPage = new NavigationPage(new MainPage());
+           
         }
 
         protected override void OnStart()

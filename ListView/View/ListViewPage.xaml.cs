@@ -1,6 +1,6 @@
 ﻿
 using System;
-
+using ListView.View;
 using Xamarin.Forms;
 
 namespace ListView
@@ -49,9 +49,15 @@ namespace ListView
 
         public void OnEdit(object sender, EventArgs e)
         {
-            // this.Navigation.PushAsync(new EntryPage());
+            this.Navigation.PushAsync(new EntryPage());
 
-            var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
+            //var newPage = new ContentPage();
+            //Navigation.PushAsync(newPage);
+           
+            //var poppedPage = Navigation.PopAsync();
+          
+
+            //var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
 
             //var Content = new StackLayout
             //{
@@ -132,8 +138,7 @@ namespace ListView
             DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
             this.AddButton.Text = e.Item.ToString();
         }
-
-
-      
+             
     }
+
 }

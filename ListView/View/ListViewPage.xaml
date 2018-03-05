@@ -210,7 +210,7 @@
                     <ViewCell>
                          <ViewCell.ContextActions>
                             <MenuItem Command="{Binding RefCommand}" CommandParameter="{Binding .}" Text="COmmand" IsDestructive="True" />
-                            <MenuItem Clicked="OnMore" CommandParameter="{Binding .}" Text="More" />
+                            <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
                             <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                         </ViewCell.ContextActions>
                         <!-- 列全体 -->

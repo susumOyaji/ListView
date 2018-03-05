@@ -47,6 +47,7 @@
     <Compile Include="View\ListViewPage.xaml.cs">
       <DependentUpon>ListViewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EntryPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
