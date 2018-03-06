@@ -7,8 +7,8 @@ namespace ListView
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new ListViewPage()); //MainPage = new NavigationPage(new MainPage());
+          
+            MainPage = MainPage = new NavigationPage(new ListViewPage()); //MainPage = new NavigationPage(new MainPage());
            
         }
 

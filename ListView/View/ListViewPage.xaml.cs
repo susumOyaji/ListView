@@ -15,6 +15,7 @@ namespace ListView
         public ListViewPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
 
@@ -49,7 +50,7 @@ namespace ListView
 
         public void OnEdit(object sender, EventArgs e)
         {
-            this.Navigation.PushAsync(new EntryPage());
+           // this.Navigation.PushAsync(new EntryPage(e));
 
             //var newPage = new ContentPage();
             //Navigation.PushAsync(newPage);
@@ -59,47 +60,20 @@ namespace ListView
 
             //var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
 
-            //var Content = new StackLayout
-            //{
-            //    WidthRequest = 400,
-            //    VerticalOptions = LayoutOptions.Center,
-            //    HorizontalOptions = LayoutOptions.Center,
-            //    Children =
-            //    {
-            //        usercode
-            //            //Entryクラスのインスタンス生成
-            //            new Entry(),
-
-            //            //テキストの設定
-            //            new Entry
-            //            {
-            //                Text = "あいうえおAIUEOaiueo曖昧模糊",
-            //            },
-
-            //             //フォントサイズを20に設定
-            //            new Entry
-            //            {
-            //                Text = "あいうえおAIUEOaiueo曖昧模糊",
-            //                FontSize = 20,
-            //            },
-
-            //    }
-            //};
-
-            //this.BindingContext = stackLayout;
+          
 
             //mi.CommandParameter as ContactHistoryItem
 
-            MenuItem mi = ((MenuItem)sender);
-            var par = mi.CommandParameter;
-            var selectedText =  this.DisplayActionSheet("Edit", "Close", "Chancel", new string[] {"qqqq", "すいか", "ぶどう"});
+            //MenuItem mi = ((MenuItem)sender);
+            //var par = mi.CommandParameter;
+            //var selectedText =  this.DisplayActionSheet("Edit", "Close", "Chancel", new string[] {"qqqq", "すいか", "ぶどう"});
            
-            if (selectedText != null)
-            {
-                //buttonDialog2.Text = selectedText;
-            }
+            //if (selectedText != null)
+            //{
+            //    //buttonDialog2.Text = selectedText;
+            //}
 
-            DisplayAlert("Edit Context Action", e.ToString() + " edit context action", "OK");
+            //DisplayAlert("Edit Context Action", e.ToString() + " edit context action", "OK");
 
             //ListViewPageViewModel.OnLabelClicked(mi);
 
@@ -135,8 +109,10 @@ namespace ListView
         /// <param name="e"></param>
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
-            this.AddButton.Text = e.Item.ToString();
+            this.Navigation.PushAsync(new EntryPage(e));
+
+           // DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
+            //this.AddButton.Text = e.Item.ToString();
         }
              
     }

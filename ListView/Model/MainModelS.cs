@@ -6,6 +6,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Globalization;
 
 //using StockMvvm.ViewModels;
 
@@ -195,7 +196,15 @@ namespace ListView
                         PercentRatio = PercentRatio + str[foundIndex1 + i1];//previous 前日比? %
                     }
 
-                    price.Realprice = Convert.ToDecimal(Value);//現在値
+                    
+                    if (Value =="---")
+                    {
+                        price.Realprice = 000;
+                    }
+                    else
+                    {
+                        price.Realprice = Convert.ToDecimal(Value);//現在値
+                    }
                     price.Prev_day = YenRatio;//前日比±
                     price.Percent = PercentRatio; //前日比％
                     price.PayAssetprice = price.Stocks * price.Itemprice;//株数*購入単価

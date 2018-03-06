@@ -258,7 +258,7 @@
                                         HorizontalTextAlignment = "Center"
                                         VerticalTextAlignment = "Start"/>
                                     <Label x:Name= "Realprice"
-                                        Text = "{Binding Realprice}"
+                                        Text = "{Binding Realprice }"
                                         TextColor = "White"
                                         FontSize="Default"     
                                         WidthRequest = "80"   
