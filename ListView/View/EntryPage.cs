@@ -6,9 +6,26 @@ namespace ListView.View
 {
     public class EntryPage : ContentPage
     {
+       
         public  EntryPage(ItemTappedEventArgs e)
         {
-            var str = e.Item.ToString();
+            var str = ((ItemTappedEventArgs)e).Item;
+
+            object[] values = { false, 12.63m, new DateTime(2009, 6, 1, 6, 32, 15), 16.09e-12,
+                    'Z', 15.15322, SByte.MinValue, Int32.MaxValue };
+
+            string result;
+
+            foreach (object value in values)
+            {
+                result = Convert.ToString(value);
+                Console.WriteLine("Converted the {0} value {1} to the {2} value {3}.",value.GetType().Name, value,
+                                     result.GetType().Name, result);
+            }
+
+
+
+
             //str.ToString();
             //string strId = ((MenuItem)sender).StyleId;
             //int StrId = Convert.ToInt16(strId);
@@ -30,7 +47,7 @@ namespace ListView.View
 
 
             //NavigationPage.SetHasNavigationBar(this, false);
-            var usercode = new Entry { Placeholder = str, PlaceholderColor = Color.Red,TextColor =Color.White, Keyboard = Keyboard.Default };
+            var usercode = new Entry { Placeholder = (string)str, PlaceholderColor = Color.Red,TextColor =Color.White, Keyboard = Keyboard.Default };
             var usercost = new Entry { Placeholder = "株数", PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
             var usershares = new Entry { Placeholder = "買価", PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
 

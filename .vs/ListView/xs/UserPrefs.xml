@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{C95081F8-B759-4A1F-8C9F-437DB11984D7}|Default">
+  <MonoDevelop.Ide.ItemProperties.ListView.Droid PreferredExecutionTarget="Android.Android_Accelerated_x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ListView/View/EntryPage.cs">
+    <Files>
+      <File FileName="ListView/View/ListViewPage.xaml" Line="331" Column="15" />
+      <File FileName="ListView/View/EntryPage.cs" Line="9" Column="8" />
+      <File FileName="ListView/View/ListViewPage.xaml.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

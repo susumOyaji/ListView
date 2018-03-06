@@ -214,9 +214,9 @@
                             <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                         </ViewCell.ContextActions>
                         <!-- 列全体 -->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                                 <!--ボタン除く列全体--> 
-                                <StackLayout Spacing="-5" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                <StackLayout Spacing="-5" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <!-- 企業コード名 -->
                                     <StackLayout Spacing="-3" Orientation="Vertical">
                                     <Label  Text = "Name"
