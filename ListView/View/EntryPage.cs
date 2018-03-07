@@ -7,16 +7,17 @@ namespace ListView.View
     public class EntryPage : ContentPage
     {
        
-        public  EntryPage(SelectedItemChangedEventArgs e)
+        public  EntryPage(object sender, SelectedItemChangedEventArgs e)
         {
+            var strId = ((MenuItem)sender).StyleId;
+            int StrId = Convert.ToInt16(strId);
            
-            
             var itemname = ((Price)e.SelectedItem).Name;
             var itemstock = ((Price)e.SelectedItem).Stocks;
             var itemprice = ((Price)e.SelectedItem).Itemprice;
 
             
-            var i = 0;
+            //var i = 0;
 
 
             // ナビゲーションバーの右上にボタンを追加する。
@@ -24,20 +25,9 @@ namespace ListView.View
             //{
             //    // 何か処理を記述
             //}));
-            ToolbarItems.Add(new ToolbarItem
-            { // <-2
-                Text = "Cansel", // <-3
-                Command = new Command(() => Navigation.PopAsync()) 
-            });
-            ToolbarItems.Add(new ToolbarItem
-            {
-                Text = "Edit",
-                Command = new Command(() => DisplayAlert("Selected", "Edit", "OK"))
-            });
-            ToolbarItems.Add(new ToolbarItem {
-                Text = "Save",
-                Command = new Command(() => DisplayAlert("Selected", "Save", "OK"))
-            });
+
+
+           
 
 
             //NavigationPage.SetHasNavigationBar(this, false);
@@ -45,7 +35,40 @@ namespace ListView.View
             var usercost = new Entry { Placeholder = itemstock.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
             var usershares = new Entry { Placeholder = itemprice.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
 
-          
+            string SaveData = usercode.Text + usercost.Text + usershares.Text;
+
+           
+            Content = new StackLayout
+            {
+                Padding = 20,
+                BackgroundColor = Color.Black,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                Children = { usercode, usercost, usershares,
+                    
+                }
+            };
+
+
+            ToolbarItems.Add(new ToolbarItem
+            { // <-2
+                Text = "Cansel", // <-3
+                Command = new Command(() => Navigation.PopAsync())
+            });
+            ToolbarItems.Add(new ToolbarItem
+            {
+                Text = "Edit",
+                Command = new Command(() => DisplayAlert("Selected", "Edit", "OK"))
+            });
+            ToolbarItems.Add(new ToolbarItem
+            {
+               
+                Text = "Save",
+                Command = new Command(() => DisplayAlert("Selected", SaveData, "OK"))
+            });
+
+
+
+
 
             //if (str != "Add")
             //{

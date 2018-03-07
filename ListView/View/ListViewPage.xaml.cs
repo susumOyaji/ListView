@@ -20,6 +20,36 @@ namespace ListView
 
 
 
+        public void OnEdit(object sender, EventArgs e)
+        {
+
+        var newPage = new ContentPage();
+        Navigation.PushAsync(newPage);
+
+        var poppedPage = Navigation.PopAsync();
+
+
+        var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
+
+
+
+        //mi.CommandParameter as ContactHistoryItem
+
+        MenuItem mi = ((MenuItem)sender);
+        var par = mi.CommandParameter;
+        var selectedText =  this.DisplayActionSheet("Edit", "Close", "Chancel", new string[] {"qqqq", "すいか", "ぶどう"});
+
+        if (selectedText != null)
+        {
+            //buttonDialog2.Text = selectedText;
+        }
+
+        DisplayAlert("Edit Context Action", e.ToString() + " edit context action", "OK");
+
+        //ListViewPageViewModel.OnLabelClicked(mi);
+
+
+         }
 
         
 
@@ -44,7 +74,7 @@ namespace ListView
         /// <param name="e"></param>
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            this.Navigation.PushAsync(new EntryPage(e));
+            this.Navigation.PushAsync(new EntryPage(sender,e));
             //DisplayAlert("Item Selected", e.SelectedItem.ToString(), "Ok");
             
         }

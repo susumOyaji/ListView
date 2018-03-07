@@ -209,11 +209,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                         <ViewCell.ContextActions>
+                        <ViewCell.ContextActions>
                             <MenuItem Command="{Binding RefCommand}" CommandParameter="{Binding .}" Text="COmmand" IsDestructive="True" />
                             <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
-                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
-                        </ViewCell.ContextActions>
+                           
+                        </ViewCell.ContextActions>  
                         <!-- 列全体 -->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                                 <!--ボタン除く列全体--> 
@@ -305,7 +305,7 @@
                                 <!-- "銘柄"  "price.Name" -->
                                 <!-- 下段 -->
                               <!-- Chengprice -->
-                              <StackLayout Spacing="-5" Orientation="Vertical" VerticalOptions="StartAndExpand">  
+                              <StackLayout Spacing="-5" Orientation="Vertical">  
                                 <Label x:Name="Chenge"
                                         Text="Chege"
                                         TextColor="Gray"
