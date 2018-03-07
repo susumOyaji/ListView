@@ -566,4 +566,75 @@ namespace ListView
 //Binding binding = new Binding("Name");
 //textBox1.SetBinding(TextBox.TextProperty, binding);
 
+
+
+
+
+ //async void OnDoThisClick(object sender, EventArgs ea)
+        //{
+        //    await DisplayAlert("Do this", "alert displays as well as TriggerAction", "Cool");
+        //}
+
+        //async void OnDoThatClick(object sender, EventArgs ea)
+        //{
+        //    await DisplayAlert("Do that", "alert displays as well as TriggerAction", "Cool");
+        //}
+       
+
+        //public void OnEdit(object sender, EventArgs e)
+        //{
+           // this.Navigation.PushAsync(new EntryPage(e));
+
+            //var newPage = new ContentPage();
+            //Navigation.PushAsync(newPage);
+           
+            //var poppedPage = Navigation.PopAsync();
+          
+
+            //var usercode = new Entry { Placeholder = "Code", Keyboard = Keyboard.Text, };
+
+          
+
+            //mi.CommandParameter as ContactHistoryItem
+
+            //MenuItem mi = ((MenuItem)sender);
+            //var par = mi.CommandParameter;
+            //var selectedText =  this.DisplayActionSheet("Edit", "Close", "Chancel", new string[] {"qqqq", "すいか", "ぶどう"});
+           
+            //if (selectedText != null)
+            //{
+            //    //buttonDialog2.Text = selectedText;
+            //}
+
+            //DisplayAlert("Edit Context Action", e.ToString() + " edit context action", "OK");
+
+            //ListViewPageViewModel.OnLabelClicked(mi);
+
+
+       // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ----------------------------------------------------------------------------------*/

@@ -7,28 +7,15 @@ namespace ListView.View
     public class EntryPage : ContentPage
     {
        
-        public  EntryPage(ItemTappedEventArgs e)
+        public  EntryPage(SelectedItemChangedEventArgs e)
         {
-            var str = ((ItemTappedEventArgs)e).Item;
+           
+            
+            var itemname = ((Price)e.SelectedItem).Name;
+            var itemstock = ((Price)e.SelectedItem).Stocks;
+            var itemprice = ((Price)e.SelectedItem).Itemprice;
 
-            object[] values = { false, 12.63m, new DateTime(2009, 6, 1, 6, 32, 15), 16.09e-12,
-                    'Z', 15.15322, SByte.MinValue, Int32.MaxValue };
-
-            string result;
-
-            foreach (object value in values)
-            {
-                result = Convert.ToString(value);
-                Console.WriteLine("Converted the {0} value {1} to the {2} value {3}.",value.GetType().Name, value,
-                                     result.GetType().Name, result);
-            }
-
-
-
-
-            //str.ToString();
-            //string strId = ((MenuItem)sender).StyleId;
-            //int StrId = Convert.ToInt16(strId);
+            
             var i = 0;
 
 
@@ -40,43 +27,25 @@ namespace ListView.View
             ToolbarItems.Add(new ToolbarItem
             { // <-2
                 Text = "Cansel", // <-3
-                Command = new Command(() => DisplayAlert("Selected", "menu1", "OK")) //<-4
+                Command = new Command(() => Navigation.PopAsync()) 
             });
-            ToolbarItems.Add(new ToolbarItem { Text = "Edit" });
-            ToolbarItems.Add(new ToolbarItem { Text = "Save" });
+            ToolbarItems.Add(new ToolbarItem
+            {
+                Text = "Edit",
+                Command = new Command(() => DisplayAlert("Selected", "Edit", "OK"))
+            });
+            ToolbarItems.Add(new ToolbarItem {
+                Text = "Save",
+                Command = new Command(() => DisplayAlert("Selected", "Save", "OK"))
+            });
 
 
             //NavigationPage.SetHasNavigationBar(this, false);
-            var usercode = new Entry { Placeholder = (string)str, PlaceholderColor = Color.Red,TextColor =Color.White, Keyboard = Keyboard.Default };
-            var usercost = new Entry { Placeholder = "株数", PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
-            var usershares = new Entry { Placeholder = "買価", PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
+            var usercode = new Entry { Placeholder = itemname, PlaceholderColor = Color.Red,TextColor =Color.White, Keyboard = Keyboard.Default };
+            var usercost = new Entry { Placeholder = itemstock.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
+            var usershares = new Entry { Placeholder = itemprice.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
 
-            Button Save = new Button { BackgroundColor = Color.Gray, Text = "Save" };
-            //Save.Clicked += Entry_Completed;
-
-            Button Cancel = new Button { BackgroundColor = Color.Red, Text = "Cansel" };
-            //Cancel.Clicked += Entry_Cancel;
-
-            Button Edit = new Button { BackgroundColor = Color.Gray, Text = "Edit" };
-            //Edit.Clicked += (object s, EventArgs f) => Edit_Completed(sender, e, StrId);
-            Edit.IsEnabled = false;
-
-            Content = new StackLayout
-            {
-                Padding = 20,
-                BackgroundColor = Color.Black,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Children = { usercode, usercost, usershares,
-                            new StackLayout
-                            {
-                                HorizontalOptions = LayoutOptions.Center,
-                                Orientation = StackOrientation.Horizontal,
-                                Children ={
-                                   // Save,Cancel,Edit
-                                }
-                             }
-                        }
-            };
+          
 
             //if (str != "Add")
             //{

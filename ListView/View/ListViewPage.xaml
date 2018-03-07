@@ -204,7 +204,8 @@
 
 
 
-        <ListView x:Name="Listview" ItemSelected="OnItemSelected" ItemTapped="OnItemTapped" SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"  HasUnevenRows="false" ItemsSource="{Binding ItemList}"> 
+        <ListView x:Name="Listview" ItemSelected="OnItemSelected" ItemTapped="OnItemTapped" SelectedItem="{Binding YourSelectedItem, Mode=TwoWay}"
+                                    SeparatorVisibility="Default" SeparatorColor="Green" HasUnevenRows="false" ItemsSource="{Binding ItemList}"> 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
