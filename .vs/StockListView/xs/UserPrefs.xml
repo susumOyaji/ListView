@@ -1,18 +1,20 @@
 ﻿<Properties StartupConfiguration="{C95081F8-B759-4A1F-8C9F-437DB11984D7}|Default">
-  <MonoDevelop.Ide.ItemProperties.ListView.Droid PreferredExecutionTarget="Android.192.168.57.101:5555" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ListView/View/EntryPage.cs">
+  <MonoDevelop.Ide.ItemProperties.ListView.Droid PreferredExecutionTarget="Android.Android_Accelerated_x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ListView/View/ListViewPage.xaml.cs">
     <Files>
       <File FileName="ListView/View/ListViewPage.xaml" Line="332" Column="15" />
       <File FileName="ListView/ViewModel/CountUpCommand.cs" Line="18" Column="35" />
-      <File FileName="ListView/View/EntryPage.cs" Line="36" Column="1" />
+      <File FileName="ListView/View/EntryPage.cs" Line="12" Column="1" />
       <File FileName="ListView/Model/MainModelS.cs" Line="245" Column="48" />
-      <File FileName="ListView/View/ListViewPage.xaml.cs" Line="84" Column="15" />
+      <File FileName="ListView/View/ListViewPage.xaml.cs" Line="88" Column="10" />
       <File FileName="ListView/ViewModel/ListViewPageViewModel.cs" Line="21" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/sumitomoshigeru/GitHub/ListView/ListView/View/EntryPage.cs" relfile="ListView/View/EntryPage.cs" line="34" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

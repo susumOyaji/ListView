@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using ListView.View;
 using Xamarin.Forms;
 
@@ -74,9 +75,13 @@ namespace ListView
         /// <param name="e"></param>
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-           // var r = ((ListView)sender).SelectedItem;
+           //var r = ((ListView)sender).SelectedItem;
            // SelectedItem
            // DisplayAlert("Item Selected", r.ToString(), "Ok");
+
+           
+            //var idx = ListView.SelectedItems[0].Index;
+            //var i= ListView.SelectedValue;
             this.Navigation.PushAsync(new EntryPage(sender,e));
           
             
