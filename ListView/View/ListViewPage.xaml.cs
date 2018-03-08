@@ -74,8 +74,11 @@ namespace ListView
         /// <param name="e"></param>
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+           // var r = ((ListView)sender).SelectedItem;
+           // SelectedItem
+           // DisplayAlert("Item Selected", r.ToString(), "Ok");
             this.Navigation.PushAsync(new EntryPage(sender,e));
-            //DisplayAlert("Item Selected", e.SelectedItem.ToString(), "Ok");
+          
             
         }
         /// <summary>
@@ -85,11 +88,12 @@ namespace ListView
         /// <param name="e"></param>
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
+            var id = e.Item.ToString();
             //mi.CommandParameter as ContactHistoryItem
             //MenuItem mi = ((MenuItem)sender);
             //this.Navigation.PushAsync(new EntryPage(e));
 
-           // DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
+            // DisplayAlert("Item Tapped", e.Item.ToString(), "Ok");
             //this.AddButton.Text = e.Item.ToString();
         }
              

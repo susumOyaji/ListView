@@ -9,9 +9,11 @@ namespace ListView.View
        
         public  EntryPage(object sender, SelectedItemChangedEventArgs e)
         {
-            var strId = ((MenuItem)sender).StyleId;
-            int StrId = Convert.ToInt16(strId);
-           
+            //var strId = ((MenuItem)sender).StyleId;
+            //int StrId = Convert.ToInt16(strId);
+
+         
+
             var itemname = ((Price)e.SelectedItem).Name;
             var itemstock = ((Price)e.SelectedItem).Stocks;
             var itemprice = ((Price)e.SelectedItem).Itemprice;
@@ -31,11 +33,11 @@ namespace ListView.View
 
 
             //NavigationPage.SetHasNavigationBar(this, false);
-            var usercode = new Entry { Placeholder = itemname, PlaceholderColor = Color.Red,TextColor =Color.White, Keyboard = Keyboard.Default };
-            var usercost = new Entry { Placeholder = itemstock.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
-            var usershares = new Entry { Placeholder = itemprice.ToString(), PlaceholderColor = Color.Red,Keyboard = Keyboard.Numeric };
+            var usercode = new Entry { Text = itemname, BackgroundColor=Color.Gray, TextColor =Color.White, Keyboard = Keyboard.Default };
+            var usercost = new Entry { Text = itemstock.ToString(), TextColor = Color.White, Keyboard = Keyboard.Numeric };
+            var usershares = new Entry { Text = itemprice.ToString(), TextColor = Color.White, Keyboard = Keyboard.Numeric };
 
-            string SaveData = usercode.Text + usercost.Text + usershares.Text;
+            string SaveData = usercode.Text + "," + usercost.Text + "," + usershares.Text + "\n";
 
            
             Content = new StackLayout
